@@ -795,6 +795,39 @@ const App = () => {
           ))}
         </section>
 
+        {/* --- Research Projects Gallery --- */}
+        <section id="research">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
+                  <BookOpen className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-slate-900">Research Projects</h2>
+                  <p className="text-slate-500 text-sm mt-1">
+                    Scroll to explore <span className="font-mono">→</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="hidden md:flex gap-2">
+              <button onClick={() => scroll('left')} className="p-2 rounded-full border border-slate-200 hover:bg-white hover:shadow-md transition-all text-slate-600"><ChevronLeft className="w-5 h-5" /></button>
+              <button onClick={() => scroll('right')} className="p-2 rounded-full border border-slate-200 hover:bg-white hover:shadow-md transition-all text-slate-600"><ChevronRight className="w-5 h-5" /></button>
+            </div>
+          </div>
+
+          <div 
+            ref={scrollContainerRef}
+            className="flex gap-6 overflow-x-auto pb-8 pt-2 snap-x snap-mandatory hide-scrollbar -mx-6 px-6"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {portfolioData.researchProjects.map((item, idx) => (
+              <ProjectCard key={idx} project={item} onOpenDiagrams={openProjectModal} />
+            ))}
+          </div>
+        </section>
+
         {/* --- Industry Experience --- */}
         <section id="experience">
           <div className="flex items-center gap-3 mb-12">
@@ -849,39 +882,6 @@ const App = () => {
                     </ul>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* --- Research Projects Gallery --- */}
-        <section id="research">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                  <BookOpen className="w-6 h-6" />
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-slate-900">Research Projects</h2>
-                  <p className="text-slate-500 text-sm mt-1">
-                    Scroll to explore <span className="font-mono">→</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="hidden md:flex gap-2">
-              <button onClick={() => scroll('left')} className="p-2 rounded-full border border-slate-200 hover:bg-white hover:shadow-md transition-all text-slate-600"><ChevronLeft className="w-5 h-5" /></button>
-              <button onClick={() => scroll('right')} className="p-2 rounded-full border border-slate-200 hover:bg-white hover:shadow-md transition-all text-slate-600"><ChevronRight className="w-5 h-5" /></button>
-            </div>
-          </div>
-
-          <div 
-            ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto pb-8 pt-2 snap-x snap-mandatory hide-scrollbar -mx-6 px-6"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {portfolioData.researchProjects.map((item, idx) => (
-              <ProjectCard key={idx} project={item} onOpenDiagrams={openProjectModal} />
             ))}
           </div>
         </section>

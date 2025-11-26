@@ -691,7 +691,7 @@ const App = () => {
         </div>
       </nav>
 
-      <main className="pt-28 px-6 max-w-6xl mx-auto space-y-32">
+      <main className="pt-24 px-6 max-w-6xl mx-auto space-y-16">
         
         {/* --- Hero Section --- */}
         <section id="about" className="flex flex-col-reverse md:flex-row items-center gap-12">

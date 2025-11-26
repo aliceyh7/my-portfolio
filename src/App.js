@@ -1037,11 +1037,6 @@ const App = () => {
                               ))}
                             </ul>
                           )}
-
-                          {/* Photo placeholder note (optional) */}
-                          <p className="mt-4 text-xs text-slate-400">
-                            Photos placeholder — will be replaced with real images.
-                          </p>
                         </div>
 
                     </div>

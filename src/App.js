@@ -305,7 +305,7 @@ const portfolioData = {
   ],
   posters: [
     {
-        title: "Closed-Loop Blood Pressure Control in Critical Care (Placeholder)",
+        title: "Closed-Loop Blood Pressure Control in Critical Care",
         date: "Fall 2025",
         file: bpPresentationPdf,
         thumb: bpPosterPhoto,
@@ -571,7 +571,6 @@ const App = () => {
       setModalContent(null);
   };
 
-  // Utility to render PDF or placeholder in modal
   const renderModalContent = (poster) => {
       if (poster.file && poster.file !== '#') {
           return (
@@ -599,7 +598,7 @@ const App = () => {
           <div className="p-10 text-center bg-slate-50 rounded-lg">
               <ScrollText className="w-16 h-16 mx-auto text-indigo-400 mb-4" />
               <h3 className="text-2xl font-bold text-slate-900">Poster Unavailable</h3>
-              <p className="text-slate-600 mt-2">The PDF file for "{poster.title}" is not currently linked. This is a placeholder.</p>
+              <p className="text-slate-600 mt-2">The PDF file for "{poster.title}" is not currently linked.</p>
           </div>
       );
   };
@@ -637,7 +636,7 @@ const App = () => {
 
         {diagrams.length === 0 && (
           <div className="mt-8 p-8 text-center rounded-xl bg-slate-50 border border-slate-200">
-            <p className="text-slate-600">No diagrams added yet (placeholder).</p>
+            <p className="text-slate-600">No diagrams added yet.</p>
           </div>
         )}
       </div>

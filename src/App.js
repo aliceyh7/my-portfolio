@@ -19,6 +19,7 @@ import {
   Link2Icon,
 
 } from 'lucide-react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Image as ImageIcon } from "lucide-react";
 import profilePic from './assets/Profile_Pic.jpg';
 import metaLogo from './assets/logos/meta.png';
@@ -528,8 +529,33 @@ const Modal = ({ isOpen, onClose, children }) => {
 
 
 // --- Main App ---
+const PdfPage = ({ title, src }) => (
+  <div className="min-h-screen bg-slate-50">
+    <div className="max-w-6xl mx-auto px-4 py-6">
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <h1 className="text-lg md:text-xl font-bold text-slate-900">{title}</h1>
+        <a
+          href={src}
+          target="_blank"
+          rel="noreferrer"
+          className="px-3 py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700"
+        >
+          Open / Download
+        </a>
+      </div>
 
-const App = () => {
+      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+        <iframe
+          src={src}
+          title={title}
+          style={{ width: "100%", height: "85vh", border: 0 }}
+        />
+      </div>
+    </div>
+  </div>
+);
+
+const HomePage = () => {
   const scrollContainerRef = useRef(null);
   const softwareScrollRef = useRef(null);
 
@@ -1111,4 +1137,19 @@ const App = () => {
   );
 };
 
-export default App;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* your existing site */}
+        <Route path="/" element={<HomePage />} />
+
+        {/* new PDF-only routes */}
+        <Route path="/acep_poster" element={<PdfPage title="ACEP Poster" src={bpPresentationPdf} />} />
+        <Route path="/fall_2023" element={<PdfPage title="Poster 1 (Fall 2023)" src={poster1} />} />
+        <Route path="/spring_2024" element={<PdfPage title="Poster 2 (Spring 2024)" src={poster2} />} />
+        <Route path="/spring_2025" element={<PdfPage title="Poster 3 (Spring 2025)" src={poster3} />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}

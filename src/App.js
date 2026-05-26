@@ -1,12 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   ChevronRight,
   ChevronLeft,
   Award,
   BookOpen,
   ArrowUpRight,
-  Briefcase,
-  GraduationCap,
   Users,
   FileText,
   Link as LinkIcon,
@@ -15,16 +13,11 @@ import {
   X,
   ScrollText,
   FileDown,
-  Icon,
-  Link2Icon,
 
 } from 'lucide-react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Image as ImageIcon } from "lucide-react";
 import profilePic from './assets/Profile_Pic.jpg';
-import metaLogo from './assets/logos/meta.png';
-import adobeLogo from './assets/logos/adobe.png';
-import ciccLogo from './assets/logos/cicc.png';
 //import cvPdf from './assets/Yuhe_Hu_CV.pdf';
 
 // Research Paper PDFs 
@@ -76,73 +69,15 @@ import sbom2 from "./assets/diagrams/sbom2.png";
 // --- Data ---
 const portfolioData = {
   name: "Yuhe Hu",
-  tagline: "Building Trustworthy Systems & Applied ML",
-  bio: "Hi, I am a senior at Duke University double majoring in Electrical/Computer Engineering and Computer Science. My research interest lies at the intersection of cybersecurity, IoT, and applied machine learning. Please feel free to reach out to me at alice.yh7@outlook.com.",
+  tagline: "Trustworthy Systems, Security, and Applied ML",
+  bio: "I build reliable, security-minded systems and applied ML tools across product infrastructure, IoT, and human-centered computing. My work connects research depth with practical engineering for systems that are dependable, scalable, and useful.",
   profileImage: profilePic,
   contact: {
-    email: "yh353@duke.edu",
+    email: "alice.yh7@outlook.com",
     linkedin: "https://linkedin.com/in/aliceh7",
     github: "https://github.com/aliceyh7",
     cv: "#", // Link to CV PDF
   },
-  education: [
-    {
-      institution: "Duke University",
-      location: "Durham, NC",
-      dates: "Aug 2022 – Dec 2025",
-      degrees: ["B.S.E. in Electrical & Computer Engineering", "B.S. in Computer Science"],
-      highlights: [
-        "Double Major, Electrical & Computer Engineering and Computer Science",
-        "Dean’s List with Distinction (Fall 2022, Fall 2023, Spring 2024, Fall 2025)",
-        "Relevant Coursework: Advanced Machine Learning, Applied Cryptography, Embedded Systems Design, Computer Vision, Algorithms & Data Structures, Operating Systems",
-      ],
-    },
-  ],
-  experience: [
-    {
-      company: "Meta",
-      logo:  metaLogo,
-      role: "Software Engineer Intern",
-      productName: "Product Infrastructure",
-      productLink: "https://www.meta.com/",
-      date: "May - Aug 2025",
-      tech: ["C++", "Python", "GraphQL", "Hack"],
-      points: [
-        "Architected the Trusted Authentication Factor (TAF) service in C++/Hack to secure high-value transactions.",
-        "Engineered risk-based device posture checks, reducing fraudulent authentication attempts by **15%**.",
-        "Achieved a 'Greatly Exceeds' performance rating (top 10% of interns) for exceptional delivery and impact."
-      ]
-    },
-    {
-      company: "Adobe",
-      logo: adobeLogo,
-      role: "Software Engineer Intern",
-      team: "Acrobat & Reader",
-      productName: "Machine Learning",
-      productLink: "https://www.adobe.com/acrobat",
-      date: "May - Aug 2024",
-      tech: ["Java Spring Boot", "Tensorflow", "Docker", "Kubernetes", "ML"],
-      points: [
-        "Spearheaded the development of an ML-powered document verification system serving **400M+** active users.",
-        "Designed and deployed scalable RESTful APIs, containerized via Docker/Kubernetes.",
-        "Optimized backend runtime efficiency by **30%** through strategic Redis caching."
-      ]
-    },
-    {
-      company: "CICC",
-      logo: ciccLogo,
-      role: "Operations & Analytics Intern",
-      team: "Global Markets",
-      productName: "Global Markets",
-      productLink: "https://www.cicc.com/",
-      date: "Summer 2023",
-      tech: ["Python", "SQL", "Data Analytics"],
-      points: [
-        "Automated complex position reconciliation pipelines using Python, reducing manual error rates by **95%**.",
-        "Built dynamic exposure reporting dashboards to provide real-time risk analysis for portfolio managers."
-      ]
-    },
-  ],
   researchProjects: [
     {
       type: "Journal Article",
@@ -277,9 +212,6 @@ const portfolioData = {
         paper: miniAmazonPaperPdf, 
         demo: "https://www.youtube.com/watch?v=cWb1-RL9Uj4&feature=youtu.be",  
       },
-      diagrams: [
-        { src: "https://placehold.co/900x520/F0FDF4/166534?text=System+Architecture", alt: "System architecture diagram" },
-      ],
       color: "bg-emerald-700",
       diagrams: [ { src: amazondiagram, alt: "System architecture diagram"},
         { src: amazondiagram2, alt: "Database schema diagram"}
@@ -677,8 +609,6 @@ const HomePage = () => {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <span className="font-bold text-lg tracking-tight text-slate-900">YH.</span>
           <div className="hidden md:flex gap-8">
-            <NavLink href="#education">Education</NavLink>
-            <NavLink href="#experience">Industry</NavLink>
             <NavLink href="#research">Research Projects</NavLink>
             <NavLink href="#posters">Poster Presentations</NavLink>
             <NavLink href="#publications">Publications</NavLink>
@@ -778,48 +708,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* --- Education (Compact) --- */}
-        <section id="education" className="max-w-4xl">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-              <GraduationCap className="w-5 h-5" />
-            </div>
-            <h2 className="text-2xl font-bold text-slate-900">Education</h2>
-          </div>
-
-          {portfolioData.education.map((edu) => (
-            <div key={edu.institution} className="bg-white border border-slate-200 rounded-xl shadow-sm p-5">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900">{edu.institution}</h3>
-                  <p className="text-xs text-slate-500">{edu.location}</p>
-                </div>
-                <span className="text-xs font-mono text-slate-500 whitespace-nowrap">{edu.dates}</span>
-              </div>
-
-              <div className="mt-3 flex flex-wrap gap-2">
-                {edu.degrees.map((d) => (
-                  <span
-                    key={d}
-                    className="px-2 py-0.5 text-[11px] font-semibold bg-indigo-100 text-indigo-700 rounded border border-indigo-200"
-                  >
-                    {d}
-                  </span>
-                ))}
-              </div>
-
-              <ul className="mt-3 space-y-2">
-                {edu.highlights.map((h) => (
-                  <li key={h} className="text-slate-600 text-sm leading-relaxed flex items-start">
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 mr-3 flex-shrink-0" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </section>
-
         {/* --- Research Projects Gallery --- */}
         <section id="research">
           <div className="flex items-center justify-between mb-8">
@@ -849,64 +737,6 @@ const HomePage = () => {
           >
             {portfolioData.researchProjects.map((item, idx) => (
               <ProjectCard key={idx} project={item} onOpenDiagrams={openProjectModal} />
-            ))}
-          </div>
-        </section>
-
-        {/* --- Industry Experience --- */}
-        <section id="experience">
-          <div className="flex items-center gap-3 mb-12">
-            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-               <Briefcase className="w-6 h-6" />
-            </div>
-            <h2 className="text-3xl font-bold text-slate-900">Industry Experience</h2>
-          </div>
-
-          <div className="space-y-12">
-            {portfolioData.experience.map((exp, idx) => (
-              <div key={idx} className="flex flex-col md:flex-row gap-6 md:gap-10 group">
-                {/* Logo Column */}
-                <div className="flex-shrink-0">
-                    <div className="w-16 h-16 rounded-xl bg-white border border-slate-200 shadow-sm p-2 flex items-center justify-center overflow-hidden">
-                        <img src={exp.logo} alt={`${exp.company} logo`} className="w-full h-full object-contain" />
-                    </div>
-                </div>
-
-                {/* Content Column */}
-                <div className="flex-1">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                          <h3 className="text-xl font-bold text-slate-900">
-                            {exp.company} 
-                          </h3>
-                          {exp.productLink && (
-                           <a href={exp.productLink} target="_blank" rel="noreferrer" title={`View ${exp.productName}`} className="text-slate-400 hover:text-indigo-600 transition-colors">
-                             <ArrowUpRight className="w-4 h-4" />
-                           </a>
-                          )}
-                      </div>
-                      <span className="text-sm font-mono text-slate-500 whitespace-nowrap">{exp.date}</span>
-                    </div>
-                    
-                    <p className="text-indigo-600 font-medium mb-3">{exp.role} <span className="text-slate-400 font-normal">({exp.productName})</span></p>
-                    
-                    {/* Tech Stack Pills */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                        {exp.tech.map(t => (
-                            <span key={t} className="px-2 py-0.5 text-xs font-semibold bg-indigo-100 text-indigo-700 rounded border border-indigo-200">{t}</span>
-                        ))}
-                    </div>
-
-                    <ul className="space-y-3">
-                      {exp.points.map((point, pIdx) => (
-                        <li key={pIdx} className="text-slate-600 text-sm leading-relaxed flex items-start">
-                          <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 mr-3 flex-shrink-0"></div>
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                </div>
-              </div>
             ))}
           </div>
         </section>
@@ -1024,7 +854,7 @@ const HomePage = () => {
                     <div key={idx} className="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
                         <img 
                             src={item.photo} 
-                            alt={`${item.role} photo`} 
+                            alt={item.role} 
                             className="w-full h-48 object-cover object-center bg-indigo-500/10"
                         />
                         <div className="p-6">

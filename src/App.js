@@ -1,29 +1,14 @@
-import React, { useState, useRef } from 'react';
-import {
-  ChevronRight,
-  ChevronLeft,
-  Award,
-  BookOpen,
-  ArrowUpRight,
-  Users,
-  FileText,
-  Link as LinkIcon,
-  Code,
-  Download,
-  X,
-  ScrollText,
-  FileDown,
-  Briefcase,
-} from 'lucide-react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Image as ImageIcon } from "lucide-react";
+import { X } from 'lucide-react';
+
 import profilePic from './assets/Profile_Pic.jpg';
 import metaLogo from './assets/logos/meta.png';
 import adobeLogo from './assets/logos/adobe.png';
 import netflixLogo from './assets/logos/netflix.svg';
-//import cvPdf from './assets/Yuhe_Hu_CV.pdf';
 
-// Research Paper PDFs 
+// Research Paper PDFs
+import cgadPdf from "./assets/papers/CGAD.pdf";
 import vlmPaperPdf from "./assets/papers/IEEE.pdf";
 import bpPresentationPdf from "./assets/papers/ACEP_Presentation.pdf";
 import moePaperPdf from "./assets/papers/MoE.pdf";
@@ -38,7 +23,7 @@ import wordGameSlides from "./assets/projects/word_game_engine_presentation.pdf"
 import miniAmazonPaperPdf from "./assets/projects/mini_amazon.pdf";
 
 // Poster Thumbnails
-import poster1photo from "./assets/thumb/thumb_p1.jpg"
+import poster1photo from "./assets/thumb/thumb_p1.jpg";
 import poster2photo from "./assets/thumb/thumb_p2.PNG";
 import poster3photo from "./assets/thumb/thumb_p3.png";
 import bpPosterPhoto from "./assets/thumb/thumb_bp.JPG";
@@ -48,11 +33,14 @@ import poster1 from "./assets/posters/Fall_2023.pdf";
 import poster2 from "./assets/posters/Spring_2024.pdf";
 import poster3 from "./assets/posters/Spring_2025.pdf";
 
-//Leadership 
+// Leadership
 import witPhoto from "./assets/leadership/wit.png";
 import taPhoto from "./assets/leadership/ta.png";
 
-//Diagrams
+// Diagrams
+import cgadFramework from "./assets/diagrams/cgad-framework.png";
+import cgadResults from "./assets/diagrams/cgad-results.png";
+import cgadScatter from "./assets/diagrams/cgad-scatter.png";
 import wordleDiagram from "./assets/diagrams/350-diagram.png";
 import yiranchenDiagram from "./assets/diagrams/661-diagram.png";
 import amazondiagram from "./assets/diagrams/amazon-diagram.png";
@@ -70,21 +58,29 @@ import sbom from "./assets/diagrams/sbom.png";
 import sbom2 from "./assets/diagrams/sbom2.png";
 
 // --- Data ---
+const SCHOLAR_PROFILE = "https://scholar.google.com/citations?hl=en&user=qB1bTbEAAAAJ";
 const SCHOLAR_CGAD =
   "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=qB1bTbEAAAAJ&citation_for_view=qB1bTbEAAAAJ:u-x6o8ySG0sC";
 
 const portfolioData = {
-  name: "Yuhe Hu",
-  tagline: "Recommendation Systems, Model Scaling & GPU-Efficient Retrieval/Ranking",
+  name: "Alice Hu",
   bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems, focused on scaling retrieval and ranking models and optimizing them for GPU training and inference. My background spans applied ML, security, and systems.",
   profileImage: profilePic,
+  contact: {
+    email: "alice.yh7@outlook.com",
+    linkedin: "https://linkedin.com/in/aliceh7",
+    github: "https://github.com/aliceyh7",
+    scholar: SCHOLAR_PROFILE,
+    cv: "#",
+  },
+
   experience: [
     {
       company: "Netflix",
       logo: netflixLogo,
       role: "ML Research Engineer",
-      productName: "Recommendations & Personalization",
-      productLink: "https://research.netflix.com/",
+      team: "Recommendations & Personalization",
+      link: "https://research.netflix.com/",
       tech: ["PyTorch", "CUDA", "Triton", "Distributed Training", "Retrieval", "Ranking"],
       points: [
         "Scale retrieval and ranking models for Netflix's recommendation and personalization systems, studying how model capacity and data scale translate into member-facing quality.",
@@ -95,8 +91,8 @@ const portfolioData = {
       company: "Meta",
       logo: metaLogo,
       role: "Software Engineer",
-      productName: "Full Time",
-      productLink: "https://www.meta.com/",
+      team: "Full Time",
+      link: "https://www.meta.com/",
       tech: ["Python", "Reinforcement Learning", "Evaluation", "Coding Models"],
       points: [
         "RL training environments and eval harnesses used to train Meta's coding models.",
@@ -106,112 +102,93 @@ const portfolioData = {
       company: "Adobe",
       logo: adobeLogo,
       role: "Software Engineer",
-      productName: "Acrobat & Reader",
-      productLink: "https://www.adobe.com/acrobat",
+      team: "Acrobat Sign",
+      link: "https://www.adobe.com/sign",
+      points: [
+        "Credential and identity verification services for Adobe's e-signature platform.",
+      ],
     },
   ],
-  contact: {
-    email: "alice.yh7@outlook.com",
-    linkedin: "https://linkedin.com/in/aliceh7",
-    github: "https://github.com/aliceyh7",
-    cv: "#", // Link to CV PDF
-  },
+
   researchProjects: [
     {
       type: "Research Report",
-      title:
-        "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
-      acceptance: "Research Report (2026) • DOI 10.13140/RG.2.2.18453.08160",
+      title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
+      venue: "Research Report, 2026",
       description:
-        "We propose Counterfactual Group-Aware Debiasing (CGAD), a two-layer framework that jointly corrects position bias and group-level exposure confounding when learning to rank from biased click feedback. CGAD estimates group-conditioned examination propensities, then trains a ranker via group-aware counterfactual risk minimization with a fairness regularizer. We introduce the GCCEG metric and show on Criteo and Avazu that CGAD keeps ranking accuracy competitive while reducing cross-group exposure disparity and improving worst-group performance.",
-      tags: ["Learning to Rank", "Counterfactual", "Fairness", "Computational Advertising", "Debiasing"],
-      links: {
-        paper: SCHOLAR_CGAD,
-      },
-      color: "bg-violet-600",
-      diagrams: [],
+        "CGAD is a two-layer framework for learning to rank from biased click feedback: it first estimates group-conditioned examination propensities, then trains the ranker with group-aware counterfactual risk minimization and a fairness regularizer. On Criteo and Avazu it keeps ranking accuracy competitive while reducing cross-group exposure disparity.",
+      tags: ["Learning to Rank", "Counterfactual", "Fairness", "Computational Advertising"],
+      links: { paper: cgadPdf, scholar: SCHOLAR_CGAD },
+      diagrams: [
+        { src: cgadFramework, alt: "Overview of the CGAD framework" },
+        { src: cgadResults, alt: "NDCG@10 and exposure fairness gap vs. position bias strength" },
+        { src: cgadScatter, alt: "Accuracy vs. fairness trade-off across configurations" },
+      ],
     },
     {
       type: "Journal Article",
-      title:
-        "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
-      acceptance: "IEEE Internet Computing (2025)",
-      isPublicationAccepted: true,
+      title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
+      venue: "IEEE Internet Computing, 2025",
       description:
-        "We evaluate commercial Large Multimodal Models (LMMs) for automated AR quality assessment using DiverseAR+, a 1,405-scene dataset. We also propose a hybrid cloud–edge system for scalable, real-time evaluation under varying network conditions.",
-      tags: ["AR/VR", "Multimodal", "Evaluation", "Edge/Cloud", "GPT-4o", "Vision-Language Models"],
-      links: {
-        paper: vlmPaperPdf,
-      },
-      color: "bg-indigo-600",
+        "We evaluate commercial Large Multimodal Models (LMMs) for automated AR quality assessment using DiverseAR+, a 1,405-scene dataset, and propose a hybrid cloud–edge system for scalable, real-time evaluation under varying network conditions.",
+      tags: ["AR/VR", "Multimodal", "Evaluation", "Edge/Cloud", "Vision-Language Models"],
+      links: { paper: vlmPaperPdf },
       diagrams: [
         { src: lindiagram, alt: "Pipeline diagram" },
         { src: lindiagram2, alt: "System architecture diagram" },
         { src: poster3photo, alt: "Poster thumbnail" },
-      ]
+      ],
     },
     {
       type: "Publication",
       title: "A Computational Model for Automated Blood Pressure Control in Critical Care",
-      acceptance:
-        "Annals of Emergency Medicine (2025) • ACEP (2025) • SAEM (2024)",
-      isPublicationAccepted: true,
+      venue: "Annals of Emergency Medicine, 2025 · ACEP 2025 · SAEM 2024",
       description:
-        "We built a computational simulation model for closed-loop blood pressure control in critical care, aiming for stable automated BP regulation. The work is accepted for publication in Annals of Emergency Medicine (2025) and was accepted/presented at ACEP 2025 and SAEM 2024.",
+        "A computational simulation model for closed-loop blood pressure control in critical care, aiming for stable automated BP regulation. Accepted for publication in Annals of Emergency Medicine and presented at ACEP 2025 and SAEM 2024.",
       tags: ["Healthcare", "Control", "Simulation", "Critical Care"],
       links: {
         github: "https://github.com/aliceyh7/Autonomous-BP-for-Hypertensive-Crises",
         paper: "https://www.annemergmed.com/current",
         poster: bpPresentationPdf,
       },
-      color: "bg-rose-600",
-      diagrams: [ { src: bpdiagram, alt: "System architecture diagram" } , { src: bpPosterPhoto, alt: "Poster thumbnail" } ],
+      diagrams: [
+        { src: bpdiagram, alt: "System architecture diagram" },
+        { src: bpPosterPhoto, alt: "Poster thumbnail" },
+      ],
     },
     {
       type: "Course Project",
       title: "Quantized Backdoor Attacks on Mixture of Experts Models",
-      acceptance: "ECE590: AI Security & Privacy",
+      venue: "ECE590: AI Security & Privacy",
       description:
-        "We design a quantization-enabled backdoor attack for MoE models where malicious behavior is dormant in FP32 but activates after low-bit quantization (e.g., INT8/INT4). We study how quantization scope (experts vs. gate vs. whole model) affects clean accuracy and attack persistence.",
+        "A quantization-enabled backdoor attack for MoE models where malicious behavior is dormant in FP32 but activates after low-bit quantization (INT8/INT4). We study how quantization scope (experts vs. gate vs. whole model) affects clean accuracy and attack persistence.",
       tags: ["Security", "MoE", "Quantization", "Adversarial ML"],
-      links: { 
-        github: "https://github.com/linrally/moe-backdoor", 
-        paper: moePaperPdf, 
-        slides: moeSlidesPdf 
-      },
-      color: "bg-emerald-600",
-      diagrams: [ { src: moediagram, alt: "Attack overview diagram" }, {src: moed2, alt: "methodology A"},  {src: moed3, alt: "methodology B"}],
+      links: { github: "https://github.com/linrally/moe-backdoor", paper: moePaperPdf, slides: moeSlidesPdf },
+      diagrams: [
+        { src: moediagram, alt: "Attack overview diagram" },
+        { src: moed2, alt: "Methodology A" },
+        { src: moed3, alt: "Methodology B" },
+      ],
     },
-
     {
       type: "Course Project",
       title: "Predicting Research Domains from Titles and Abstracts Using ArXiv Data",
-      acceptance: "ECE684: Natural Language Processing",
+      venue: "ECE684: Natural Language Processing",
       description:
-        "We classify ArXiv papers into CS subfields from titles and abstracts, comparing Multinomial Naive Bayes, Doc2Vec+MLP, and an LSTM model. The project highlights trade-offs between lightweight baselines and neural approaches for large-scale paper categorization.",
-      tags: ["NLP", "Text Classification", "ArXiv", "ML"],
-      links: { 
-        paper: abstractPaperPdf, 
-        github: "https://github.com/aliceyh7/ECE684-Research-Abstract-Classifier" 
-      },
-      color: "bg-blue-600",
-      diagrams: [ { src: nlpdiagram, alt: "Model architecture diagram" } ],
+        "Classifying ArXiv papers into CS subfields from titles and abstracts, comparing Multinomial Naive Bayes, Doc2Vec+MLP, and an LSTM model, with a focus on the trade-offs between lightweight baselines and neural approaches.",
+      tags: ["NLP", "Text Classification", "ArXiv"],
+      links: { paper: abstractPaperPdf, github: "https://github.com/aliceyh7/ECE684-Research-Abstract-Classifier" },
+      diagrams: [{ src: nlpdiagram, alt: "Model architecture diagram" }],
     },
-
     {
       type: "Course Project",
       title: "Adaptive Model Optimization for Audio Classification on Edge Devices",
-      acceptance: "ECE661: Deep Neural Networks",
+      venue: "ECE661: Deep Neural Networks",
       description:
-        "We optimize a ResNet-152 music-genre classifier (GTZAN) for Raspberry Pi deployment using FP16/INT8 and dynamic quantization. The optimized variants reduce latency and memory use with minimal accuracy loss.",
-      tags: ["Edge ML", "Quantization", "Audio", "Raspberry Pi"],
-      links: { 
-        paper: ece661Pdf, 
-        slides: ece661SlidesPdf, 
-        github: "https://github.com/aliceyh7/ece661_final_project"
-      },
-      color: "bg-slate-700",
-      diagrams: [ { src: yiranchenDiagram, alt: "Optimization pipeline diagram" } ],
+        "Optimizing a ResNet-152 music-genre classifier (GTZAN) for Raspberry Pi deployment using FP16/INT8 and dynamic quantization, reducing latency and memory use with minimal accuracy loss.",
+      tags: ["Edge ML", "Quantization", "Audio"],
+      links: { paper: ece661Pdf, slides: ece661SlidesPdf, github: "https://github.com/aliceyh7/ece661_final_project" },
+      diagrams: [{ src: yiranchenDiagram, alt: "Optimization pipeline diagram" }],
     },
   ],
 
@@ -220,145 +197,129 @@ const portfolioData = {
       type: "Hardware / FPGA",
       title: "MIPS Pipelined Processor & Word Game Engine",
       description:
-        "Built and tested a 5-stage pipelined MIPS-style processor and deployed it on FPGA. On top of our CPU, we implemented a word game engine and shipped two games—Wordle and Word Hunt. The entire game logic runs as MIPS assembly on our processor, with keyboard input and VGA output via memory-mapped I/O (MMIO). Emphasis was on low-level systems: datapath/control, pipelining behavior, and real-time I/O handled at the hardware/software boundary.",
-      tags: ["FPGA", "Verilog", "MIPS Assembly", "Pipelining", "MMIO", "VGA", "Keyboard I/O"],
-      links: {
-        slides: wordGameSlides,
-        github: "https://github.com/ben594/word-game-engine",
-        paper: wordGamePaper, 
-      },
-      color: "bg-slate-900",
-      diagrams: [ {
-        src: wordle, alt: "Word Game Engine Architecture"
-      }, 
-      {
-        src: wordhunt, alt: "Word Game Engine Architecture"
-      }, 
-      { src: wordleDiagram, alt: "MIPS processor and game engine architecture" } ],
+        "A 5-stage pipelined MIPS-style processor deployed on FPGA, with a word game engine (Wordle and Word Hunt) running entirely as MIPS assembly on the processor. Keyboard input and VGA output are handled via memory-mapped I/O.",
+      tags: ["FPGA", "Verilog", "MIPS Assembly", "Pipelining", "MMIO"],
+      links: { slides: wordGameSlides, github: "https://github.com/ben594/word-game-engine", paper: wordGamePaper },
+      diagrams: [
+        { src: wordle, alt: "Word Game Engine architecture" },
+        { src: wordhunt, alt: "Word Hunt on the engine" },
+        { src: wordleDiagram, alt: "MIPS processor and game engine architecture" },
+      ],
     },
-
     {
       type: "Security / Supply Chain",
-      title: "SBOM & Software Supply-Chain Security (Policy → Engineering)",
+      title: "SBOM & Software Supply-Chain Security",
       description:
-        "Explored how Software Bills of Materials (SBOMs) fit into modern software supply-chain defense. We analyzed common risk points (dependencies, provenance, build integrity), then proposed a practical workflow for generating and consuming SBOMs during development and release. Delivered a final presentation and demo narrative focused on real deployment constraints (teams, tooling, CI integration, and usability).",
-      tags: ["SBOM", "Supply Chain Security", "DevSecOps", "Dependencies", "CI/CD"],
-      links: {
-        video: "https://www.youtube.com/watch?v=6gWMghLFA-Y&t=3s",
-      },
+        "How Software Bills of Materials fit into modern supply-chain defense: an analysis of common risk points (dependencies, provenance, build integrity) and a practical workflow for generating and consuming SBOMs during development and release.",
+      tags: ["SBOM", "Supply Chain Security", "DevSecOps", "CI/CD"],
+      links: { video: "https://www.youtube.com/watch?v=6gWMghLFA-Y&t=3s" },
       diagrams: [
         { src: sbom, alt: "SBOM generation/consumption pipeline" },
-        { src: sbom2, alt: "SBOM generation/consumption pipeline" },
+        { src: sbom2, alt: "SBOM pipeline detail" },
       ],
-      color: "bg-indigo-700",
     },
-
     {
       type: "Full-Stack Systems",
       title: "MiniAmazon — Marketplace for Duke Students",
       description:
-        "Built a mini e-commerce platform tailored to Duke students: product browsing/search, listings, carts, purchasing flows, and order history. The project emphasized end-to-end system thinking—data modeling, transactional workflows, and reliable APIs—plus a polished final demo that showcased a realistic marketplace experience.",
-      tags: ["Full-Stack", "SQL", "REST APIs", "Transactions", "Auth", "Web App"],
+        "A mini e-commerce platform for Duke students: product browsing and search, listings, carts, purchasing flows, and order history, with an emphasis on data modeling, transactional workflows, and reliable APIs.",
+      tags: ["Full-Stack", "SQL", "REST APIs", "Transactions"],
       links: {
         github: "https://github.com/Starfarmer2/316MiniAmazon/blob/main/README_MS4.md",
-        paper: miniAmazonPaperPdf, 
-        demo: "https://www.youtube.com/watch?v=cWb1-RL9Uj4&feature=youtu.be",  
+        paper: miniAmazonPaperPdf,
+        demo: "https://www.youtube.com/watch?v=cWb1-RL9Uj4&feature=youtu.be",
       },
-      color: "bg-emerald-700",
-      diagrams: [ { src: amazondiagram, alt: "System architecture diagram"},
-        { src: amazondiagram2, alt: "Database schema diagram"}
-      ]  
+      diagrams: [
+        { src: amazondiagram, alt: "System architecture diagram" },
+        { src: amazondiagram2, alt: "Database schema diagram" },
+      ],
     },
   ],
-
 
   publications: [
     {
-        title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
-        venue: "Research Report, 2026",
-        authors: "Wu, Y., Zhang, K., Huang, H., Hu, Y.",
-        link: SCHOLAR_CGAD,
-        type: "Research Report"
+      title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
+      authors: "Yilun Wu, Kaili Zhang, Hejun Huang, Yuhe Hu",
+      venue: "Research Report",
+      year: "2026",
+      link: cgadPdf,
+      status: "Published",
     },
     {
-        title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
-        venue: "IEEE Internet Computing, 2025",
-        authors: "Duan, L., Hu, Y., et al.",
-        link: "#", 
-        type: "Peer-Reviewed Publication"
+      title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
+      authors: "Yuhe Hu",
+      venue: "Under review",
+      year: "2026",
+      status: "Under review",
     },
     {
-        title: "A Computational Model for Automated Blood Pressure Control in Critical Care",
-        venue: "Annals of Emergency Medicine, 2025",
-        authors: "Hu, Y., Broder, J.S., et al.",
-        link: "#", 
-        type: "Peer-Reviewed Publication"
-    }
+      title: "Is Your Test-Time Learner Actually Learning? Error Correction in Trained TTT Layers",
+      authors: "Yuhe Hu, Wen Jia Hu",
+      venue: "Under review",
+      year: "2026",
+      status: "Under review",
+    },
+    {
+      title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
+      authors: "Shangqing Shi, Meimei Zhang, Yuhe Hu, Haoliang Zhang, Saisai Hu, Zixiao Huang, Zhiming Lin, Xander Zhang",
+      venue: "Under review",
+      year: "2026",
+      status: "Under review",
+    },
+    {
+      title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
+      authors: "Lin Duan, Yuhe Hu, et al.",
+      venue: "IEEE Internet Computing",
+      year: "2025",
+      link: vlmPaperPdf,
+      status: "Published",
+    },
+    {
+      title: "A Computational Model for Automated Blood Pressure Control in Critical Care",
+      authors: "Yuhe Hu, Joshua S. Broder, et al.",
+      venue: "Annals of Emergency Medicine",
+      year: "2025",
+      link: "https://www.annemergmed.com/current",
+      status: "Published",
+    },
   ],
-  manuscripts: [
-    {
-        title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
-        venue: "Under review, 2026",
-        authors: "Hu, Y.",
-        link: "#",
-        type: "In Submission"
-    },
-    {
-        title: "Is Your Test-Time Learner Actually Learning? Error Correction in Trained TTT Layers",
-        venue: "Under review, 2026",
-        authors: "Hu, Y., Hu, W.J.",
-        link: "#",
-        type: "In Submission"
-    },
-    {
-        title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
-        venue: "Under review, 2026",
-        authors: "Shi, S., Zhang, M., Hu, Y., Zhang, H., Hu, S., Huang, Z., Lin, Z., Zhang, X.",
-        link: "#",
-        type: "In Submission"
-    },
-  ],
+
   posters: [
     {
-        title: "Closed-Loop Blood Pressure Control in Critical Care",
-        date: "Fall 2025",
-        file: bpPresentationPdf,
-        thumb: bpPosterPhoto,
-        desc: "A computational control model for autonomous drug delivery to stabilize blood pressure in hypertensive crises.",
-        presenting_photo: bpPosterPhoto,
+      title: "Closed-Loop Blood Pressure Control in Critical Care",
+      date: "Fall 2025",
+      file: bpPresentationPdf,
+      thumb: bpPosterPhoto,
+      desc: "A computational control model for autonomous drug delivery to stabilize blood pressure in hypertensive crises.",
     },
     {
-        title: "Vision-Language Model-Based Evaluation of Shadows & Lighting in AR Scenes",
-        date: "Spring 2025",
-        file: poster3,
-        thumb: poster3photo,
-        desc: "Evaluating the perceptual realism of AR scenes using GPT-4o, compared to traditional CNN methods.",
-        presenting_photo: poster3photo,
+      title: "Vision-Language Model-Based Evaluation of Shadows & Lighting in AR Scenes",
+      date: "Spring 2025",
+      file: poster3,
+      thumb: poster3photo,
+      desc: "Evaluating the perceptual realism of AR scenes using GPT-4o, compared to traditional CNN methods.",
     },
     {
-        title: "IoT Camera-Assisted Localization for AR in Simulated and Real-World Environments",
-        date: "Spring 2024",
-        file: poster2,
-        thumb: poster2photo,
-        desc: "Improving AR tracking precision by integrating third-view IoT camera data via YOLOv5.",
-        presenting_photo: poster2photo,
+      title: "IoT Camera-Assisted Localization for AR in Simulated and Real-World Environments",
+      date: "Spring 2024",
+      file: poster2,
+      thumb: poster2photo,
+      desc: "Improving AR tracking precision by integrating third-view IoT camera data via YOLOv5.",
     },
     {
-        title: "Using Synthetic Data & Simulation to Enhance Object Detection Algorithms in Indoor Environments",
-        date: "Fall 2023",
-        file: poster1,
-        thumb: poster1photo,
-        desc: "Leveraging Unity and Meta Quest 3 to generate high-fidelity synthetic datasets for robust object detection.",
-        presenting_photo: poster1photo,
-
+      title: "Using Synthetic Data & Simulation to Enhance Object Detection Algorithms in Indoor Environments",
+      date: "Fall 2023",
+      file: poster1,
+      thumb: poster1photo,
+      desc: "Leveraging Unity and Meta Quest 3 to generate high-fidelity synthetic datasets for robust object detection.",
     },
   ],
+
   leadership: [
     {
       role: "Teaching Assistant (CS & ECE)",
       org: "Duke University",
-      desc:
-        "Teaching Assistant for 6 semesters (out of 7) at Duke. Supported students through office hours, recitations, and grading across core CS/ECE courses.",
+      desc: "Teaching Assistant for 6 semesters at Duke, supporting students through office hours, recitations, and grading across core CS/ECE courses.",
       details: [
         "Design & Analysis of Algorithms (Fall 2024, Spring 2025)",
         "Signals & Systems (Spring 2023, Fall 2024)",
@@ -370,18 +331,18 @@ const portfolioData = {
     {
       role: "President",
       org: "Duke Women in Technology",
-      desc:
-        "Led Duke’s Women in Tech community by organizing mentorship, workshops, and recruiting events, and partnering with sponsors to expand opportunities for members.",
-      instagram: "https://www.instagram.com/dukewit/",
+      desc: "Led Duke's Women in Tech community by organizing mentorship, workshops, and recruiting events, and partnering with sponsors to expand opportunities for members.",
+      link: { href: "https://www.instagram.com/dukewit/", label: "@dukewit" },
       photo: witPhoto,
-    }
+    },
   ],
+
   awards: {
     universityHonorsAndScholarships: [
-      "Dean’s List with Distinction, Duke University",
+      "Dean's List with Distinction, Duke University",
       "Duke Technology Scholar – Women in Technology Scholarship (Spring 2024, Spring 2025)",
-      "Dean’s Merit Award, University of Toronto – $10,000 scholarship for secondary school academic achievement",
-      "President’s Scholarship of Distinction, University of Waterloo – $5,000 entrance merit-based scholarship",
+      "Dean's Merit Award, University of Toronto – $10,000 scholarship for secondary school academic achievement",
+      "President's Scholarship of Distinction, University of Waterloo – $5,000 entrance merit-based scholarship",
       "Alumni Women in Technology Entrance Scholarship, University of Waterloo – $5,000 entrance award recognizing academic merit and leadership in technology",
     ],
     nationalAndInternational: [
@@ -393,479 +354,295 @@ const portfolioData = {
   },
 };
 
-// --- Sub-components ---
+// --- Small building blocks ---
 
-const Tag = ({ text }) => (
-  <span className="px-2 py-1 text-xs font-medium bg-slate-100 text-slate-700 rounded-md border border-slate-200">
-    {text}
-  </span>
+const SectionHeading = ({ id, children }) => (
+  <div className="mb-8 border-b border-sand pb-3">
+    <h2 id={id} className="font-serif text-2xl md:text-3xl text-ink">{children}</h2>
+  </div>
 );
 
-const NavLink = ({ href, children }) => (
-  <a 
-    href={href}
-    className="text-sm font-medium text-slate-500 transition-colors hover:text-indigo-600"
-  >
-    {children}
-  </a>
-);
-
-const ProjectLinkButton = ({ href, icon: Icon, label, color }) => {
-    if (!href || href === '#') return null;
-    const isCode = label === 'Code';
-    const linkClasses = `flex items-center text-xs font-semibold px-3 py-1.5 rounded-full transition-all ${
-        isCode 
-        ? 'bg-slate-900 text-white hover:bg-slate-700' 
-        : `bg-indigo-50 text-indigo-700 hover:bg-indigo-100`
-    }`;
-    
-    return (
-        <a href={href} target="_blank" rel="noreferrer" className={linkClasses}>
-            <Icon className="w-4 h-4 mr-1.5" /> 
-            {label}
-        </a>
-    );
+const TextLink = ({ href, children, external = true }) => {
+  if (!href || href === "#") return null;
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      className="text-forest underline decoration-sand underline-offset-4 hover:decoration-forest transition-colors"
+    >
+      {children}
+    </a>
+  );
 };
 
+const LINK_LABELS = [
+  ["paper", "Paper"],
+  ["scholar", "Google Scholar"],
+  ["slides", "Slides"],
+  ["poster", "Poster"],
+  ["demo", "Demo"],
+  ["video", "Video"],
+  ["github", "Code"],
+];
+
+const ProjectLinks = ({ links = {} }) => {
+  const items = LINK_LABELS.filter(([key]) => links[key] && links[key] !== "#");
+  if (items.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
+      {items.map(([key, label]) => (
+        <TextLink key={key} href={links[key]}>{label}</TextLink>
+      ))}
+    </div>
+  );
+};
 
 const ProjectCard = ({ project, onOpenDiagrams }) => (
-  <div className="min-w-[360px] md:min-w-[440px] min-h-[520px] bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col h-full snap-start group relative">
-    <div className={`h-2 ${project.color} w-full`} />
-    <div className="p-6 flex flex-col h-full">
-      <div className="flex justify-between items-start mb-4">
-        <span className="text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide bg-slate-100 text-slate-600">
-          {project.type}
-        </span>
-      </div>
+  <article className="bg-paper border border-sand rounded-md p-6 flex flex-col gap-4">
+    <div>
+      <p className="text-xs uppercase tracking-widest text-muted mb-2">{project.type}</p>
+      <h3 className="font-serif text-xl leading-snug text-ink">{project.title}</h3>
+      {project.venue && <p className="text-sm text-muted mt-1">{project.venue}</p>}
+    </div>
 
-      <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
-        {project.title}
-      </h3>
+    <p className="text-sm leading-relaxed text-ink/80">{project.description}</p>
 
-      {/* Acceptance line */}
-      {project.acceptance && (
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          {project.isPublicationAccepted && (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              <Award className="w-3.5 h-3.5" />
-              Accepted for publication
-            </span>
-          )}
-          <span className="text-xs text-slate-500">{project.acceptance}</span>
-        </div>
-      )}
-
-      <p className="text-slate-600 text-sm leading-relaxed mb-4">
-        {project.description}
-      </p>
-
-      {/* ✅ Small diagrams BELOW description (no big button) */}
-      {project.diagrams?.length > 0 && (
-        <div className="mb-5">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-2">
-            <ImageIcon className="w-4 h-4" />
-            Diagrams
-          </div>
-
-          <div className="grid grid-cols-3 gap-2">
-            {project.diagrams.slice(0, 6).map((d, i) => (
-              <button
-                type="button"
-                key={i}
-                onClick={() => onOpenDiagrams?.(project)} // opens your modal (optional)
-                className="group relative rounded-lg overflow-hidden border border-slate-200 bg-slate-50 hover:shadow-sm transition"
-                title={d.alt || "Diagram"}
-              >
-                <img
-                  src={d.src}
-                  alt={d.alt || `Diagram ${i + 1}`}
-                  className="w-full h-20 object-cover"
-                  loading="lazy"
-                />
-              </button>
-            ))}
-          </div>
-
-          {/* optional: show "+N more" */}
-          {project.diagrams.length > 6 && (
-            <p className="mt-2 text-[11px] text-slate-400">
-              +{project.diagrams.length - 6} more
-            </p>
-          )}
-        </div>
-      )}
-
-      <div className="flex flex-wrap gap-2 mb-6">
-        {project.tags.map((tag) => (
-          <Tag key={tag} text={tag} />
+    {project.diagrams?.length > 0 && (
+      <div className="grid grid-cols-3 gap-2">
+        {project.diagrams.slice(0, 3).map((d, i) => (
+          <button
+            type="button"
+            key={i}
+            onClick={() => onOpenDiagrams?.(project)}
+            className="rounded border border-sand bg-white overflow-hidden hover:border-forest transition-colors"
+            title={d.alt || "Figure"}
+          >
+            <img src={d.src} alt={d.alt || `Figure ${i + 1}`} className="w-full h-20 object-contain p-1" loading="lazy" />
+          </button>
         ))}
       </div>
+    )}
 
-      <div className="flex flex-wrap gap-3 mt-auto border-t border-slate-100 pt-4">
-        <ProjectLinkButton href={project.links?.paper || project.links?.pdf} icon={FileText} label="Report" />
-        <ProjectLinkButton href={project.links?.slides} icon={ScrollText} label="Slides" />
-        <ProjectLinkButton href={project.links?.demo} icon={ArrowUpRight} label="Demo" />
-        <ProjectLinkButton href={project.links?.video} icon={LinkIcon} label="Video" />
-        <ProjectLinkButton href={project.links?.github || project.links?.code} icon={Code} label="Code" />
-      </div>
+    <p className="text-xs text-muted">{project.tags.join(" · ")}</p>
+
+    <div className="mt-auto pt-3 border-t border-sand">
+      <ProjectLinks links={project.links} />
     </div>
-  </div>
+  </article>
 );
 
-const PublicationCard = ({ pub }) => (
-  <div className="bg-white border border-slate-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-    <div>
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-xs font-bold text-indigo-600 uppercase tracking-wide">{pub.type}</span>
-        <FileText className="w-4 h-4 text-slate-400" />
-      </div>
-      <h3 className="font-bold text-slate-900 mb-2 leading-snug">{pub.title}</h3>
-      <p className="text-sm text-slate-600 italic mb-4">Authors: {pub.authors}</p>
-    </div>
-    <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-      <span className="text-xs font-medium bg-slate-100 px-2 py-1 rounded text-slate-600">{pub.venue}</span>
-      {pub.link && pub.link !== "#" && (
-        <a href={pub.link} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-indigo-600" title="View Article">
-          <ArrowUpRight className="w-5 h-5" />
-        </a>
-      )}
-    </div>
-  </div>
-);
-
-// --- Modal Component ---
 const Modal = ({ isOpen, onClose, children }) => {
-    if (!isOpen) return null;
-
-    return (
-        <div 
-            className="fixed inset-0 bg-slate-900 bg-opacity-80 z-[100] flex items-center justify-center p-4 transition-opacity"
-            onClick={onClose}
-        >
-            <div 
-                className="bg-white rounded-xl w-full h-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col"
-                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
-            >
-                <div className="flex justify-end p-3">
-                    <button 
-                        onClick={onClose}
-                        className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-full transition-colors"
-                    >
-                        <X className="w-6 h-6" />
-                    </button>
-                </div>
-                <div className="flex-grow overflow-auto p-4 md:p-6">
-                    {children}
-                </div>
-            </div>
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 bg-ink/70 z-[100] flex items-center justify-center p-4" onClick={onClose}>
+      <div
+        className="bg-paper rounded-md w-full h-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col border border-sand"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-end p-2">
+          <button onClick={onClose} className="p-2 text-muted hover:text-ink transition-colors" aria-label="Close">
+            <X className="w-5 h-5" />
+          </button>
         </div>
-    );
+        <div className="flex-grow overflow-auto px-6 pb-6">{children}</div>
+      </div>
+    </div>
+  );
 };
 
-
-// --- Main App ---
 const PdfPage = ({ title, src }) => (
-  <div className="min-h-screen bg-slate-50">
+  <div className="min-h-screen bg-cream">
     <div className="max-w-6xl mx-auto px-4 py-6">
       <div className="mb-4 flex items-center justify-between gap-3">
-        <h1 className="text-lg md:text-xl font-bold text-slate-900">{title}</h1>
-        <a
-          href={src}
-          target="_blank"
-          rel="noreferrer"
-          className="px-3 py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700"
-        >
+        <h1 className="font-serif text-xl text-ink">{title}</h1>
+        <a href={src} target="_blank" rel="noreferrer" className="px-3 py-2 rounded bg-forest text-cream text-sm hover:bg-forest-dark">
           Open / Download
         </a>
       </div>
-
-      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-        <iframe
-          src={src}
-          title={title}
-          style={{ width: "100%", height: "85vh", border: 0 }}
-        />
+      <div className="bg-paper border border-sand rounded-md overflow-hidden">
+        <iframe src={src} title={title} style={{ width: "100%", height: "85vh", border: 0 }} />
       </div>
     </div>
   </div>
 );
 
+// --- Home page ---
+
 const HomePage = () => {
-  const scrollContainerRef = useRef(null);
-  const softwareScrollRef = useRef(null);
-
-  const scrollByRef = (ref, direction) => {
-    if (!ref?.current) return;
-    const scrollAmount = 420; // tuned for your larger cards
-    ref.current.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
-  };
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState(null);
-  const [projectModalOpen, setProjectModalOpen] = useState(false);
-  const [projectModalProject, setProjectModalProject] = useState(null);
-
-  const openProjectModal = (project) => {
-    setProjectModalProject(project);
-    setProjectModalOpen(true);
-  };
-
-  const closeProjectModal = () => {
-    setProjectModalOpen(false);
-    setProjectModalProject(null);
-  };
-
-  const scroll = (direction) => {
-    if (scrollContainerRef.current) {
-      const { current } = scrollContainerRef;
-      const scrollAmount = 420;
-      current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
-    }
-  };
-  
-  const openPosterModal = (poster) => {
-      setModalContent(poster);
-      setModalOpen(true);
-  };
-
-  const closePosterModal = () => {
-      setModalOpen(false);
-      setModalContent(null);
-  };
-
-  const renderModalContent = (poster) => {
-      if (poster.file && poster.file !== '#') {
-          return (
-              <div className="flex flex-col h-full">
-                  <h3 className="text-xl font-bold mb-2 text-slate-900">{poster.title}</h3>
-                  <p className="text-slate-600 mb-4">{poster.desc}</p>
-                  <iframe 
-                      src={poster.file} 
-                      title={poster.title} 
-                      className="w-full flex-grow border-0 rounded-lg shadow-inner min-h-[50vh]"
-                      style={{ minHeight: '600px' }}
-                  />
-                  <a 
-                      href={poster.file} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg text-center font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center"
-                  >
-                      <Download className="w-4 h-4 mr-2" /> Download Poster ({poster.date})
-                  </a>
-              </div>
-          );
-      }
-      return (
-          <div className="p-10 text-center bg-slate-50 rounded-lg">
-              <ScrollText className="w-16 h-16 mx-auto text-indigo-400 mb-4" />
-              <h3 className="text-2xl font-bold text-slate-900">Poster Unavailable</h3>
-              <p className="text-slate-600 mt-2">The PDF file for "{poster.title}" is not currently linked.</p>
-          </div>
-      );
-  };
-
-  const renderProjectModalContent = (project) => {
-    const diagrams = project?.diagrams || [];
-    return (
-      <div className="flex flex-col h-full">
-        <h3 className="text-2xl font-bold text-slate-900">{project.title}</h3>
-        {project.type && <p className="text-sm text-indigo-600 font-medium mt-1">{project.type}</p>}
-        {project.description && <p className="text-slate-600 mt-4">{project.description}</p>}
-
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {diagrams.map((d, i) => (
-            <a
-              key={i}
-              href={d.src}
-              target="_blank"
-              rel="noreferrer"
-              className="group block rounded-xl border border-slate-200 overflow-hidden bg-white hover:shadow-md transition"
-              title="Open image in new tab"
-            >
-              <img
-                src={d.src}
-                alt={d.alt || `Diagram ${i + 1}`}
-                className="w-full h-56 object-cover"
-                loading="lazy"
-              />
-              <div className="p-3 text-sm text-slate-600">
-                {d.alt || `Diagram ${i + 1}`}
-              </div>
-            </a>
-          ))}
-        </div>
-
-        {diagrams.length === 0 && (
-          <div className="mt-8 p-8 text-center rounded-xl bg-slate-50 border border-slate-200">
-            <p className="text-slate-600">No diagrams added yet.</p>
-          </div>
-        )}
-      </div>
-    );
-  };
+  const [posterModal, setPosterModal] = useState(null);
+  const [projectModal, setProjectModal] = useState(null);
+  const { contact } = portfolioData;
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-20">
-      
-      {/* --- Navigation --- */}
-      <nav className="sticky top-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 z-50 shadow-sm">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-bold text-lg tracking-tight text-slate-900">YH.</span>
-          <div className="hidden md:flex gap-8">
-            <NavLink href="#experience">Experience</NavLink>
-            <NavLink href="#research">Research Projects</NavLink>
-            <NavLink href="#posters">Poster Presentations</NavLink>
-            <NavLink href="#publications">Publications</NavLink>
-            <NavLink href="#extra">Leadership</NavLink>
-            <NavLink href="#awards">Awards</NavLink>
-          </div>
-          <div className="flex gap-3">
-            <a
-              href={portfolioData.contact.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              title="LinkedIn"
-              className="text-slate-500 hover:text-indigo-600"
-            >
-              <LinkIcon className="w-5 h-5" />
-            </a>
-            <a
-              href={portfolioData.contact.github}
-              target="_blank"
-              rel="noreferrer"
-              title="GitHub"
-              className="text-slate-500 hover:text-indigo-600"
-            >
-              <Code className="w-5 h-5" />
-            </a>
-            <a
-              href={portfolioData.contact.cv}
-              target="_blank"
-              rel="noreferrer"
-              title="CV"
-              className="text-slate-500 hover:text-indigo-600"
-            >
-              <FileDown className="w-5 h-5" />
-            </a>
+    <div className="min-h-screen bg-cream text-ink font-sans pb-16">
+      {/* Navigation */}
+      <nav className="sticky top-0 w-full bg-cream/95 backdrop-blur border-b border-sand z-50">
+        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+          <a href="#top" className="font-serif text-lg text-ink">Alice Hu</a>
+          <div className="hidden md:flex gap-7 text-sm text-muted">
+            <a href="#experience" className="hover:text-ink">Experience</a>
+            <a href="#research" className="hover:text-ink">Research</a>
+            <a href="#publications" className="hover:text-ink">Publications</a>
+            <a href="#software" className="hover:text-ink">Projects</a>
+            <a href="#posters" className="hover:text-ink">Posters</a>
+            <a href="#leadership" className="hover:text-ink">Leadership</a>
+            <a href="#awards" className="hover:text-ink">Awards</a>
           </div>
         </div>
       </nav>
 
-      <main className="pt-24 px-6 max-w-6xl mx-auto space-y-16">
-        
-        {/* --- Hero Section --- */}
-        <section id="about" className="flex flex-col-reverse md:flex-row items-center gap-12">
-          <div className="flex-1 space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900">
-                Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Alice</span>.
-              </h1>
-              <p className="text-xl md:text-2xl text-slate-600 font-light leading-relaxed max-w-2xl">
-                {portfolioData.tagline}
-              </p>
-              <p className="text-slate-600 max-w-xl leading-relaxed">
-                {portfolioData.bio}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={portfolioData.contact.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-white text-slate-900 font-medium rounded-full border border-slate-200 hover:bg-slate-50 transition-colors shadow-sm"
-              >
-                <LinkIcon className="w-5 h-5" />
-                LinkedIn
-              </a>
-
-              <a
-                href={portfolioData.contact.github}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-white text-slate-900 font-medium rounded-full border border-slate-200 hover:bg-slate-50 transition-colors shadow-sm"
-              >
-                <LinkIcon className="w-5 h-5" />
-                GitHub
-              </a>
-
-              <a
-                href={portfolioData.contact.cv}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-white text-slate-900 font-medium rounded-full border border-slate-200 hover:bg-slate-50 transition-colors shadow-sm"
-              >
-                <LinkIcon className="w-5 h-5" />
-                Resume
-              </a>
+      <main id="top" className="max-w-5xl mx-auto px-6 pt-16 md:pt-20 space-y-20">
+        {/* Hero */}
+        <section className="flex flex-col-reverse md:flex-row md:items-center gap-10">
+          <div className="flex-1 space-y-6">
+            <h1 className="font-serif text-4xl md:text-5xl text-ink">Alice Hu</h1>
+            <p className="text-base md:text-lg leading-relaxed text-ink/80 max-w-xl">{portfolioData.bio}</p>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+              <TextLink href={contact.linkedin}>LinkedIn</TextLink>
+              <TextLink href={contact.github}>GitHub</TextLink>
+              <TextLink href={contact.scholar}>Google Scholar</TextLink>
+              <TextLink href={`mailto:${contact.email}`} external={false}>Email</TextLink>
             </div>
           </div>
-          
-          {/* Profile Image */}
-          <div className="w-64 h-64 md:w-80 md:h-80 relative flex-shrink-0">
-             <div className="absolute inset-0 bg-indigo-100 rounded-full blur-2xl opacity-60 animate-pulse"></div>
-             <img 
-               src={portfolioData.profileImage} 
-               alt="Yuhe Hu" 
-               className="relative w-full h-full object-cover rounded-full border-4 border-white shadow-xl"
-             />
+          <div className="w-44 h-44 md:w-56 md:h-56 flex-shrink-0">
+            <img
+              src={portfolioData.profileImage}
+              alt="Alice Hu"
+              className="w-full h-full object-cover rounded-full border border-sand"
+            />
           </div>
         </section>
 
-        {/* --- Industry Experience --- */}
-        <section id="experience">
-          <div className="flex items-center gap-3 mb-12">
-            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-              <Briefcase className="w-6 h-6" />
-            </div>
-            <h2 className="text-3xl font-bold text-slate-900">Industry Experience</h2>
-          </div>
-
-          <div className="space-y-12">
-            {portfolioData.experience.map((exp, idx) => (
-              <div key={idx} className="flex flex-col md:flex-row gap-6 md:gap-10 group">
-                {/* Logo Column */}
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 rounded-xl bg-white border border-slate-200 shadow-sm p-2 flex items-center justify-center overflow-hidden">
-                    {exp.logo ? (
-                      <img src={exp.logo} alt={`${exp.company} logo`} className="w-full h-full object-contain" />
-                    ) : (
-                      <span className="text-2xl font-extrabold text-slate-700">{exp.company.charAt(0)}</span>
-                    )}
-                  </div>
+        {/* Experience */}
+        <section>
+          <SectionHeading id="experience">Experience</SectionHeading>
+          <div className="space-y-10">
+            {portfolioData.experience.map((exp) => (
+              <div key={exp.company} className="flex gap-5 md:gap-8">
+                <div className="w-12 h-12 flex-shrink-0 rounded border border-sand bg-white p-1.5 flex items-center justify-center">
+                  <img src={exp.logo} alt={`${exp.company} logo`} className="w-full h-full object-contain" />
                 </div>
-
-                {/* Content Column */}
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h3 className="text-xl font-bold text-slate-900">{exp.company}</h3>
-                    {exp.productLink && (
-                      <a href={exp.productLink} target="_blank" rel="noreferrer" title={`View ${exp.productName}`} className="text-slate-400 hover:text-indigo-600 transition-colors">
-                        <ArrowUpRight className="w-4 h-4" />
-                      </a>
-                    )}
+                  <div className="flex flex-wrap items-baseline gap-x-3">
+                    <h3 className="font-serif text-xl text-ink">
+                      {exp.link ? (
+                        <a href={exp.link} target="_blank" rel="noreferrer" className="hover:text-forest transition-colors">
+                          {exp.company}
+                        </a>
+                      ) : exp.company}
+                    </h3>
+                    <span className="text-sm text-muted">{exp.role}{exp.team ? ` · ${exp.team}` : ""}</span>
                   </div>
-
-                  <p className="text-indigo-600 font-medium mb-3">
-                    {exp.role}
-                    {exp.productName && <span className="text-slate-400 font-normal"> ({exp.productName})</span>}
-                  </p>
-
-                  {exp.tech?.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {exp.tech.map((t) => (
-                        <span key={t} className="px-2 py-0.5 text-xs font-semibold bg-indigo-100 text-indigo-700 rounded border border-indigo-200">{t}</span>
-                      ))}
-                    </div>
-                  )}
-
                   {exp.points?.length > 0 && (
-                    <ul className="space-y-3">
-                      {exp.points.map((point, pIdx) => (
-                        <li key={pIdx} className="text-slate-600 text-sm leading-relaxed flex items-start">
-                          <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 mr-3 flex-shrink-0"></div>
-                          {point}
+                    <ul className="mt-3 space-y-2">
+                      {exp.points.map((p) => (
+                        <li key={p} className="text-sm leading-relaxed text-ink/80 pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-1.5 before:h-px before:bg-muted">
+                          {p}
                         </li>
+                      ))}
+                    </ul>
+                  )}
+                  {exp.tech?.length > 0 && (
+                    <p className="mt-3 text-xs text-muted">{exp.tech.join(" · ")}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Research */}
+        <section>
+          <SectionHeading id="research">Research</SectionHeading>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {portfolioData.researchProjects.map((item) => (
+              <ProjectCard key={item.title} project={item} onOpenDiagrams={setProjectModal} />
+            ))}
+          </div>
+        </section>
+
+        {/* Publications */}
+        <section>
+          <SectionHeading id="publications">Publications</SectionHeading>
+          <ol className="divide-y divide-sand border-t border-b border-sand">
+            {portfolioData.publications.map((pub) => (
+              <li key={pub.title} className="py-5 flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
+                <span className="text-sm text-muted md:w-14 flex-shrink-0 font-mono">{pub.year}</span>
+                <div className="flex-1">
+                  <h3 className="font-serif text-lg leading-snug text-ink">
+                    {pub.link && pub.link !== "#" ? (
+                      <a href={pub.link} target="_blank" rel="noreferrer" className="hover:text-forest transition-colors">{pub.title}</a>
+                    ) : pub.title}
+                  </h3>
+                  <p className="text-sm text-muted mt-1">{pub.authors}</p>
+                  <p className="text-sm mt-1">
+                    {pub.status === "Under review" ? (
+                      <span className="italic text-muted">Under review</span>
+                    ) : (
+                      <span className="text-ink/80">{pub.venue}</span>
+                    )}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* Software projects */}
+        <section>
+          <SectionHeading id="software">Projects</SectionHeading>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {portfolioData.softwareProjects.map((item) => (
+              <ProjectCard key={item.title} project={item} onOpenDiagrams={setProjectModal} />
+            ))}
+          </div>
+        </section>
+
+        {/* Posters */}
+        <section>
+          <SectionHeading id="posters">Posters</SectionHeading>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {portfolioData.posters.map((poster) => (
+              <button
+                key={poster.title}
+                type="button"
+                onClick={() => setPosterModal(poster)}
+                className="text-left group"
+              >
+                <div className="aspect-[4/3] overflow-hidden rounded border border-sand bg-white">
+                  <img src={poster.thumb} alt={`Thumbnail for ${poster.title}`} className="w-full h-full object-cover" />
+                </div>
+                <p className="mt-3 text-xs text-muted">{poster.date}</p>
+                <h3 className="text-sm font-medium leading-snug mt-1 group-hover:text-forest transition-colors">{poster.title}</h3>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Leadership */}
+        <section>
+          <SectionHeading id="leadership">Leadership & Teaching</SectionHeading>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {portfolioData.leadership.map((item) => (
+              <div key={item.role} className="bg-paper border border-sand rounded-md overflow-hidden">
+                <img src={item.photo} alt={item.role} className="w-full h-44 object-cover" />
+                <div className="p-6">
+                  <h3 className="font-serif text-xl text-ink">{item.role}</h3>
+                  <p className="text-sm text-muted mt-1">
+                    {item.org}
+                    {item.link && (
+                      <>
+                        {" · "}
+                        <TextLink href={item.link.href}>{item.link.label}</TextLink>
+                      </>
+                    )}
+                  </p>
+                  <p className="text-sm leading-relaxed text-ink/80 mt-3">{item.desc}</p>
+                  {item.details?.length > 0 && (
+                    <ul className="mt-3 space-y-1">
+                      {item.details.map((d) => (
+                        <li key={d} className="text-sm text-ink/80">{d}</li>
                       ))}
                     </ul>
                   )}
@@ -875,259 +652,73 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* --- Research Projects Gallery --- */}
-        <section id="research">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                  <BookOpen className="w-6 h-6" />
-                </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-slate-900">Research Projects</h2>
-                  <p className="text-slate-500 text-sm mt-1">
-                    Scroll to explore <span className="font-mono">→</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="hidden md:flex gap-2">
-              <button onClick={() => scroll('left')} className="p-2 rounded-full border border-slate-200 hover:bg-white hover:shadow-md transition-all text-slate-600"><ChevronLeft className="w-5 h-5" /></button>
-              <button onClick={() => scroll('right')} className="p-2 rounded-full border border-slate-200 hover:bg-white hover:shadow-md transition-all text-slate-600"><ChevronRight className="w-5 h-5" /></button>
-            </div>
-          </div>
-
-          <div 
-            ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto pb-8 pt-2 snap-x snap-mandatory hide-scrollbar -mx-6 px-6"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {portfolioData.researchProjects.map((item, idx) => (
-              <ProjectCard key={idx} project={item} onOpenDiagrams={openProjectModal} />
-            ))}
-          </div>
-        </section>
-
-        {/* --- Software Projects Gallery --- */}
-        <section id="software">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                <Code className="w-6 h-6" />
-              </div>
-              <div>
-                <h2 className="text-3xl font-bold text-slate-900">Software Projects</h2>
-                <p className="text-slate-500 text-sm mt-1">
-                  Systems, security, and low-level builds <span className="font-mono">→</span>
-                </p>
-              </div>
-            </div>
-
-            <div className="hidden md:flex gap-2">
-              <button
-                onClick={() => scrollByRef(softwareScrollRef, "left")}
-                className="p-2 rounded-full border border-slate-200 hover:bg-white hover:shadow-md transition-all text-slate-600"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => scrollByRef(softwareScrollRef, "right")}
-                className="p-2 rounded-full border border-slate-200 hover:bg-white hover:shadow-md transition-all text-slate-600"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-
-          <div
-            ref={softwareScrollRef}
-            className="flex gap-6 overflow-x-auto pb-8 pt-2 snap-x snap-mandatory hide-scrollbar -mx-6 px-6"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {portfolioData.softwareProjects.map((item, idx) => (
-              <ProjectCard key={idx} project={item} onOpenDiagrams={openProjectModal} />
-            ))}
-          </div>
-        </section>
-        
-        {/* --- Publications (Horizontal) --- */}
-        <section id="publications">
-           <div className="flex items-center gap-3 mb-8">
-                <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                    <FileText className="w-6 h-6" />
-                </div>
-                <h2 className="text-3xl font-bold text-slate-900">Publications</h2>
-           </div>
-           
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {portfolioData.publications.map((pub, idx) => (
-                    <PublicationCard key={idx} pub={pub} />
-                ))}
-           </div>
-
-           {portfolioData.manuscripts?.length > 0 && (
-             <>
-               <h3 className="text-lg font-bold text-slate-700 mt-12 mb-4">Manuscripts in Submission</h3>
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                 {portfolioData.manuscripts.map((pub, idx) => (
-                   <PublicationCard key={idx} pub={pub} />
-                 ))}
-               </div>
-             </>
-           )}
-        </section>
-        
-        {/* --- Poster Gallery --- */}
-        <section id="posters">
-           <div className="flex items-center gap-3 mb-8">
-                <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                    <ScrollText className="w-6 h-6" />
-                </div>
-                <h2 className="text-3xl font-bold text-slate-900">Poster Gallery</h2>
-           </div>
-           
-           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-               {portfolioData.posters.map((poster, idx) => (
-                   <div key={idx} className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden group">
-                       <button onClick={() => openPosterModal(poster)} className="w-full h-40 overflow-hidden relative block">
-                            <img src={poster.thumb} alt={`Thumbnail for ${poster.title}`} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                            <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <span className="text-white font-bold text-sm bg-indigo-600 px-3 py-1.5 rounded-full">View Poster</span>
-                            </div>
-                       </button>
-                       <div className="p-4">
-                           <h3 className="text-sm font-bold text-slate-900 leading-snug mb-1">{poster.title}</h3>
-                           <p className="text-xs text-slate-500 mb-3">{poster.desc.substring(0, 50)}...</p>
-                           <span className="text-xs font-mono text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">{poster.date}</span>
-                       </div>
-                   </div>
-               ))}
-           </div>
-        </section>
-
-        {/* --- Leadership / Extra --- */}
-        <section id="extra">
-            <div className="flex items-center gap-3 mb-8">
-                <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                    <Users className="w-6 h-6" />
-                </div>
-                <h2 className="text-3xl font-bold text-slate-900">Leadership & Teaching</h2>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {portfolioData.leadership.map((item, idx) => (
-                    <div key={idx} className="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
-                        <img 
-                            src={item.photo} 
-                            alt={item.role} 
-                            className="w-full h-48 object-cover object-center bg-indigo-500/10"
-                        />
-                        <div className="p-6">
-                          <div className="flex items-start justify-between gap-3">
-                            <div>
-                              <h3 className="text-xl font-bold text-slate-900 mb-1">{item.role}</h3>
-                              <p className="text-sm text-indigo-600 font-medium mb-3">{item.org}</p>
-                            </div>
-
-                            {/* Prominent Instagram link for WiT */}
-                            {item.instagram && (
-                              <a
-                                href={item.instagram}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors"
-                                title="Duke Women in Technology Instagram"
-                              >
-                                <LinkIcon className="w-4 h-4" />
-                                @dukewit
-                              </a>
-                            )}
-                          </div>
-
-                          <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
-
-                          {/* TA course list */}
-                          {item.details?.length > 0 && (
-                            <ul className="mt-4 space-y-2">
-                              {item.details.map((d) => (
-                                <li key={d} className="text-slate-600 text-sm leading-relaxed flex items-start">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 mr-3 flex-shrink-0" />
-                                  {d}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-
-                    </div>
-                ))}
-            </div>
-        </section>
-
-        {/* --- Awards --- */}
-        <section id="awards" className="max-w-6xl">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-              <Award className="w-6 h-6" />
-            </div>
-            <h2 className="text-3xl font-bold text-slate-900">Awards</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
-              <h3 className="text-lg font-bold text-slate-900 mb-4">University Honors & Scholarships</h3>
+        {/* Awards */}
+        <section>
+          <SectionHeading id="awards">Awards</SectionHeading>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div>
+              <h3 className="text-xs uppercase tracking-widest text-muted mb-4">University Honors & Scholarships</h3>
               <ul className="space-y-2">
                 {portfolioData.awards.universityHonorsAndScholarships.map((a) => (
-                  <li key={a} className="text-slate-600 text-sm leading-relaxed flex items-start">
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 mr-3 flex-shrink-0" />
-                    {a}
-                  </li>
+                  <li key={a} className="text-sm leading-relaxed text-ink/80">{a}</li>
                 ))}
               </ul>
             </div>
-
-            <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-6">
-              <h3 className="text-lg font-bold text-slate-900 mb-4">National & International</h3>
+            <div>
+              <h3 className="text-xs uppercase tracking-widest text-muted mb-4">National & International</h3>
               <ul className="space-y-2">
                 {portfolioData.awards.nationalAndInternational.map((a) => (
-                  <li key={a} className="text-slate-600 text-sm leading-relaxed flex items-start">
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 mr-3 flex-shrink-0" />
-                    {a}
-                  </li>
+                  <li key={a} className="text-sm leading-relaxed text-ink/80">{a}</li>
                 ))}
               </ul>
             </div>
           </div>
         </section>
 
-        {/* --- Footer --- */}
-        <footer className="border-t border-slate-200 pt-12 pb-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-             <h3 className="font-bold text-slate-900">Yuhe Hu</h3>
-             <p className="text-slate-500 text-sm">Personal Website</p>
-          </div>
-          <div className="text-sm text-slate-400">
-            &copy; {new Date().getFullYear()} All Rights Reserved.
-          </div>
+        <footer className="border-t border-sand pt-8 flex flex-col md:flex-row justify-between gap-2 text-sm text-muted">
+          <span>Alice Hu</span>
+          <span>&copy; {new Date().getFullYear()}</span>
         </footer>
-
       </main>
-      
-      {/* Poster Modal */}
-      <Modal isOpen={modalOpen} onClose={closePosterModal}>
-          {modalContent && renderModalContent(modalContent)}
+
+      {/* Poster modal */}
+      <Modal isOpen={!!posterModal} onClose={() => setPosterModal(null)}>
+        {posterModal && (
+          <div className="flex flex-col h-full">
+            <h3 className="font-serif text-xl text-ink mb-1">{posterModal.title}</h3>
+            <p className="text-sm text-muted mb-4">{posterModal.desc}</p>
+            <iframe
+              src={posterModal.file}
+              title={posterModal.title}
+              className="w-full flex-grow border border-sand rounded"
+              style={{ minHeight: "600px" }}
+            />
+            <div className="mt-4 text-sm">
+              <TextLink href={posterModal.file}>Download poster ({posterModal.date})</TextLink>
+            </div>
+          </div>
+        )}
       </Modal>
 
-      {/* Project Diagrams Modal */}
-      <Modal isOpen={projectModalOpen} onClose={closeProjectModal}>
-        {projectModalProject && renderProjectModalContent(projectModalProject)}
+      {/* Figures modal */}
+      <Modal isOpen={!!projectModal} onClose={() => setProjectModal(null)}>
+        {projectModal && (
+          <div>
+            <h3 className="font-serif text-2xl text-ink">{projectModal.title}</h3>
+            <p className="text-sm text-muted mt-1">{projectModal.venue || projectModal.type}</p>
+            <div className="mt-6 space-y-6">
+              {(projectModal.diagrams || []).map((d, i) => (
+                <figure key={i} className="border border-sand rounded bg-white overflow-hidden">
+                  <a href={d.src} target="_blank" rel="noreferrer" title="Open image in new tab">
+                    <img src={d.src} alt={d.alt || `Figure ${i + 1}`} className="w-full object-contain max-h-[70vh]" loading="lazy" />
+                  </a>
+                  <figcaption className="px-4 py-3 text-sm text-muted">{d.alt || `Figure ${i + 1}`}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        )}
       </Modal>
-
-      <style>{`
-        /* Hide scrollbar for gallery section */
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      `}</style>
     </div>
   );
 };
@@ -1136,10 +727,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* your existing site */}
         <Route path="/" element={<HomePage />} />
-
-        {/* new PDF-only routes */}
         <Route path="/acep_poster" element={<PdfPage title="ACEP Poster" src={bpPresentationPdf} />} />
         <Route path="/fall_2023" element={<PdfPage title="Poster 1 (Fall 2023)" src={poster1} />} />
         <Route path="/spring_2024" element={<PdfPage title="Poster 2 (Spring 2024)" src={poster2} />} />

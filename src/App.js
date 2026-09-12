@@ -20,6 +20,7 @@ import { Image as ImageIcon } from "lucide-react";
 import profilePic from './assets/Profile_Pic.jpg';
 import metaLogo from './assets/logos/meta.png';
 import adobeLogo from './assets/logos/adobe.png';
+import netflixLogo from './assets/logos/netflix.svg';
 //import cvPdf from './assets/Yuhe_Hu_CV.pdf';
 
 // Research Paper PDFs 
@@ -80,6 +81,7 @@ const portfolioData = {
   experience: [
     {
       company: "Netflix",
+      logo: netflixLogo,
       role: "ML Research Engineer",
       productName: "Recommendations & Personalization",
       productLink: "https://research.netflix.com/",

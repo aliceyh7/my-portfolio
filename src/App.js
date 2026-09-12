@@ -13,11 +13,13 @@ import {
   X,
   ScrollText,
   FileDown,
-
+  Briefcase,
 } from 'lucide-react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Image as ImageIcon } from "lucide-react";
 import profilePic from './assets/Profile_Pic.jpg';
+import metaLogo from './assets/logos/meta.png';
+import adobeLogo from './assets/logos/adobe.png';
 //import cvPdf from './assets/Yuhe_Hu_CV.pdf';
 
 // Research Paper PDFs 
@@ -67,11 +69,45 @@ import sbom from "./assets/diagrams/sbom.png";
 import sbom2 from "./assets/diagrams/sbom2.png";
 
 // --- Data ---
+const SCHOLAR_CGAD =
+  "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=qB1bTbEAAAAJ&citation_for_view=qB1bTbEAAAAJ:u-x6o8ySG0sC";
+
 const portfolioData = {
   name: "Yuhe Hu",
-  tagline: "Trustworthy Systems, Security, and Applied ML",
-  bio: "I build reliable, security-minded systems and applied ML tools across product infrastructure, IoT, and human-centered computing. My work connects research depth with practical engineering for systems that are dependable, scalable, and useful.",
+  tagline: "Recommendation Systems, Model Scaling & GPU-Efficient Retrieval/Ranking",
+  bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems, focused on scaling retrieval and ranking models and optimizing them for GPU training and inference. My background spans applied ML, security, and systems.",
   profileImage: profilePic,
+  experience: [
+    {
+      company: "Netflix",
+      role: "ML Research Engineer",
+      productName: "Recommendations & Personalization",
+      productLink: "https://research.netflix.com/",
+      tech: ["PyTorch", "CUDA", "Triton", "Distributed Training", "Retrieval", "Ranking"],
+      points: [
+        "Scale retrieval and ranking models for Netflix's recommendation and personalization systems, studying how model capacity and data scale translate into member-facing quality.",
+        "Optimize GPU training and inference for large-scale recommenders (kernel efficiency, memory footprint, and throughput) to make larger models practical in production.",
+      ],
+    },
+    {
+      company: "Meta",
+      logo: metaLogo,
+      role: "Software Engineer",
+      productName: "Full Time",
+      productLink: "https://www.meta.com/",
+      tech: ["Python", "Reinforcement Learning", "Evaluation", "Coding Models"],
+      points: [
+        "RL training environments and eval harnesses used to train Meta's coding models.",
+      ],
+    },
+    {
+      company: "Adobe",
+      logo: adobeLogo,
+      role: "Software Engineer",
+      productName: "Acrobat & Reader",
+      productLink: "https://www.adobe.com/acrobat",
+    },
+  ],
   contact: {
     email: "alice.yh7@outlook.com",
     linkedin: "https://linkedin.com/in/aliceh7",
@@ -79,6 +115,20 @@ const portfolioData = {
     cv: "#", // Link to CV PDF
   },
   researchProjects: [
+    {
+      type: "Research Report",
+      title:
+        "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
+      acceptance: "Research Report (2026) • DOI 10.13140/RG.2.2.18453.08160",
+      description:
+        "We propose Counterfactual Group-Aware Debiasing (CGAD), a two-layer framework that jointly corrects position bias and group-level exposure confounding when learning to rank from biased click feedback. CGAD estimates group-conditioned examination propensities, then trains a ranker via group-aware counterfactual risk minimization with a fairness regularizer. We introduce the GCCEG metric and show on Criteo and Avazu that CGAD keeps ranking accuracy competitive while reducing cross-group exposure disparity and improving worst-group performance.",
+      tags: ["Learning to Rank", "Counterfactual", "Fairness", "Computational Advertising", "Debiasing"],
+      links: {
+        paper: SCHOLAR_CGAD,
+      },
+      color: "bg-violet-600",
+      diagrams: [],
+    },
     {
       type: "Journal Article",
       title:
@@ -222,6 +272,13 @@ const portfolioData = {
 
   publications: [
     {
+        title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
+        venue: "Research Report, 2026",
+        authors: "Wu, Y., Zhang, K., Huang, H., Hu, Y.",
+        link: SCHOLAR_CGAD,
+        type: "Research Report"
+    },
+    {
         title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
         venue: "IEEE Internet Computing, 2025",
         authors: "Duan, L., Hu, Y., et al.",
@@ -235,6 +292,29 @@ const portfolioData = {
         link: "#", 
         type: "Peer-Reviewed Publication"
     }
+  ],
+  manuscripts: [
+    {
+        title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
+        venue: "Under review, 2026",
+        authors: "Hu, Y.",
+        link: "#",
+        type: "In Submission"
+    },
+    {
+        title: "Is Your Test-Time Learner Actually Learning? Error Correction in Trained TTT Layers",
+        venue: "Under review, 2026",
+        authors: "Hu, Y., Hu, W.J.",
+        link: "#",
+        type: "In Submission"
+    },
+    {
+        title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
+        venue: "Under review, 2026",
+        authors: "Shi, S., Zhang, M., Hu, Y., Zhang, H., Hu, S., Huang, Z., Lin, Z., Zhang, X.",
+        link: "#",
+        type: "In Submission"
+    },
   ],
   posters: [
     {
@@ -430,6 +510,27 @@ const ProjectCard = ({ project, onOpenDiagrams }) => (
   </div>
 );
 
+const PublicationCard = ({ pub }) => (
+  <div className="bg-white border border-slate-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+    <div>
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-xs font-bold text-indigo-600 uppercase tracking-wide">{pub.type}</span>
+        <FileText className="w-4 h-4 text-slate-400" />
+      </div>
+      <h3 className="font-bold text-slate-900 mb-2 leading-snug">{pub.title}</h3>
+      <p className="text-sm text-slate-600 italic mb-4">Authors: {pub.authors}</p>
+    </div>
+    <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+      <span className="text-xs font-medium bg-slate-100 px-2 py-1 rounded text-slate-600">{pub.venue}</span>
+      {pub.link && pub.link !== "#" && (
+        <a href={pub.link} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-indigo-600" title="View Article">
+          <ArrowUpRight className="w-5 h-5" />
+        </a>
+      )}
+    </div>
+  </div>
+);
+
 // --- Modal Component ---
 const Modal = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
@@ -609,6 +710,7 @@ const HomePage = () => {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <span className="font-bold text-lg tracking-tight text-slate-900">YH.</span>
           <div className="hidden md:flex gap-8">
+            <NavLink href="#experience">Experience</NavLink>
             <NavLink href="#research">Research Projects</NavLink>
             <NavLink href="#posters">Poster Presentations</NavLink>
             <NavLink href="#publications">Publications</NavLink>
@@ -708,6 +810,69 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* --- Industry Experience --- */}
+        <section id="experience">
+          <div className="flex items-center gap-3 mb-12">
+            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
+              <Briefcase className="w-6 h-6" />
+            </div>
+            <h2 className="text-3xl font-bold text-slate-900">Industry Experience</h2>
+          </div>
+
+          <div className="space-y-12">
+            {portfolioData.experience.map((exp, idx) => (
+              <div key={idx} className="flex flex-col md:flex-row gap-6 md:gap-10 group">
+                {/* Logo Column */}
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 rounded-xl bg-white border border-slate-200 shadow-sm p-2 flex items-center justify-center overflow-hidden">
+                    {exp.logo ? (
+                      <img src={exp.logo} alt={`${exp.company} logo`} className="w-full h-full object-contain" />
+                    ) : (
+                      <span className="text-2xl font-extrabold text-slate-700">{exp.company.charAt(0)}</span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Content Column */}
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xl font-bold text-slate-900">{exp.company}</h3>
+                    {exp.productLink && (
+                      <a href={exp.productLink} target="_blank" rel="noreferrer" title={`View ${exp.productName}`} className="text-slate-400 hover:text-indigo-600 transition-colors">
+                        <ArrowUpRight className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
+
+                  <p className="text-indigo-600 font-medium mb-3">
+                    {exp.role}
+                    {exp.productName && <span className="text-slate-400 font-normal"> ({exp.productName})</span>}
+                  </p>
+
+                  {exp.tech?.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {exp.tech.map((t) => (
+                        <span key={t} className="px-2 py-0.5 text-xs font-semibold bg-indigo-100 text-indigo-700 rounded border border-indigo-200">{t}</span>
+                      ))}
+                    </div>
+                  )}
+
+                  {exp.points?.length > 0 && (
+                    <ul className="space-y-3">
+                      {exp.points.map((point, pIdx) => (
+                        <li key={pIdx} className="text-slate-600 text-sm leading-relaxed flex items-start">
+                          <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 mr-3 flex-shrink-0"></div>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* --- Research Projects Gallery --- */}
         <section id="research">
           <div className="flex items-center justify-between mb-8">
@@ -794,22 +959,20 @@ const HomePage = () => {
            
            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {portfolioData.publications.map((pub, idx) => (
-                    <div key={idx} className="bg-white border border-slate-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                        <div>
-                            <div className="flex items-center gap-2 mb-2">
-                                <span className="text-xs font-bold text-indigo-600 uppercase tracking-wide">{pub.type}</span>
-                                <FileText className="w-4 h-4 text-slate-400" />
-                            </div>
-                            <h3 className="font-bold text-slate-900 mb-2 leading-snug">{pub.title}</h3>
-                            <p className="text-sm text-slate-600 italic mb-4">Authors: {pub.authors}</p>
-                        </div>
-                        <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                             <span className="text-xs font-medium bg-slate-100 px-2 py-1 rounded text-slate-600">{pub.venue}</span>
-                             <a href={pub.link} className="text-slate-400 hover:text-indigo-600" title="View Article"><ArrowUpRight className="w-5 h-5" /></a>
-                        </div>
-                    </div>
+                    <PublicationCard key={idx} pub={pub} />
                 ))}
            </div>
+
+           {portfolioData.manuscripts?.length > 0 && (
+             <>
+               <h3 className="text-lg font-bold text-slate-700 mt-12 mb-4">Manuscripts in Submission</h3>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 {portfolioData.manuscripts.map((pub, idx) => (
+                   <PublicationCard key={idx} pub={pub} />
+                 ))}
+               </div>
+             </>
+           )}
         </section>
         
         {/* --- Poster Gallery --- */}

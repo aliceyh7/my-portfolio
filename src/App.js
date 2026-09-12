@@ -63,7 +63,7 @@ const SCHOLAR_CGAD =
   "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=qB1bTbEAAAAJ&citation_for_view=qB1bTbEAAAAJ:u-x6o8ySG0sC";
 
 const portfolioData = {
-  name: "Alice Hu",
+  name: "Yuhe (Alice) Hu",
   bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems, focused on scaling retrieval and ranking models and optimizing them for GPU training and inference. My background spans applied ML, security, and systems.",
   profileImage: profilePic,
   contact: {
@@ -479,7 +479,7 @@ const HomePage = () => {
       {/* Navigation */}
       <nav className="sticky top-0 w-full bg-cream/95 backdrop-blur border-b border-sand z-50">
         <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-          <a href="#top" className="font-serif text-lg text-ink">Alice Hu</a>
+          <a href="#top" className="font-serif text-lg tracking-wide text-ink">Y.H.</a>
           <div className="hidden md:flex gap-7 text-sm text-muted">
             <a href="#experience" className="hover:text-ink">Experience</a>
             <a href="#research" className="hover:text-ink">Research</a>
@@ -496,7 +496,7 @@ const HomePage = () => {
         {/* Hero */}
         <section className="flex flex-col-reverse md:flex-row md:items-center gap-10">
           <div className="flex-1 space-y-6">
-            <h1 className="font-serif text-4xl md:text-5xl text-ink">Alice Hu</h1>
+            <h1 className="font-serif text-4xl md:text-5xl text-ink">Yuhe (Alice) Hu</h1>
             <p className="text-base md:text-lg leading-relaxed text-ink/80 max-w-xl">{portfolioData.bio}</p>
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
               <TextLink href={contact.linkedin}>LinkedIn</TextLink>
@@ -508,7 +508,7 @@ const HomePage = () => {
           <div className="w-44 h-44 md:w-56 md:h-56 flex-shrink-0">
             <img
               src={portfolioData.profileImage}
-              alt="Alice Hu"
+              alt="Yuhe (Alice) Hu"
               className="w-full h-full object-cover rounded-full border border-sand"
             />
           </div>
@@ -676,7 +676,7 @@ const HomePage = () => {
         </section>
 
         <footer className="border-t border-sand pt-8 flex flex-col md:flex-row justify-between gap-2 text-sm text-muted">
-          <span>Alice Hu</span>
+          <span>Yuhe (Alice) Hu</span>
           <span>&copy; {new Date().getFullYear()}</span>
         </footer>
       </main>

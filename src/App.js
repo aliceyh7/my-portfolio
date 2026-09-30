@@ -8,7 +8,6 @@ import adobeLogo from './assets/logos/adobe.png';
 import netflixLogo from './assets/logos/netflix.svg';
 
 // Research Paper PDFs
-import cgadPdf from "./assets/papers/CGAD.pdf";
 import vlmPaperPdf from "./assets/papers/IEEE.pdf";
 import bpPresentationPdf from "./assets/papers/ACEP_Presentation.pdf";
 import moePaperPdf from "./assets/papers/MoE.pdf";
@@ -121,20 +120,6 @@ const portfolioData = {
       links: { paper: "https://openreview.net/forum?id=QZdcb68DRP" },
     },
     {
-      type: "Research Report",
-      title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
-      venue: "Research Report, 2026",
-      description:
-        "CGAD is a two-layer framework for learning to rank from biased click feedback: it first estimates group-conditioned examination propensities, then trains the ranker with group-aware counterfactual risk minimization and a fairness regularizer. On Criteo and Avazu it keeps ranking accuracy competitive while reducing cross-group exposure disparity.",
-      tags: ["Learning to Rank", "Counterfactual", "Fairness", "Computational Advertising"],
-      links: { paper: cgadPdf, scholar: SCHOLAR_CGAD },
-      diagrams: [
-        { src: cgadFramework, alt: "Overview of the CGAD framework" },
-        { src: cgadResults, alt: "NDCG@10 and exposure fairness gap vs. position bias strength" },
-        { src: cgadScatter, alt: "Accuracy vs. fairness trade-off across configurations" },
-      ],
-    },
-    {
       type: "Journal Article",
       title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
       venue: "IEEE Internet Computing, 2025",
@@ -199,6 +184,20 @@ const portfolioData = {
       links: { paper: ece661Pdf, slides: ece661SlidesPdf, github: "https://github.com/aliceyh7/ece661_final_project" },
       diagrams: [{ src: yiranchenDiagram, alt: "Optimization pipeline diagram" }],
     },
+    {
+      type: "Research Report",
+      title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
+      venue: "Research Report, 2026",
+      description:
+        "CGAD is a two-layer framework for learning to rank from biased click feedback: it first estimates group-conditioned examination propensities, then trains the ranker with group-aware counterfactual risk minimization and a fairness regularizer. On Criteo and Avazu it keeps ranking accuracy competitive while reducing cross-group exposure disparity.",
+      tags: ["Learning to Rank", "Counterfactual", "Fairness", "Computational Advertising"],
+      links: { scholar: SCHOLAR_CGAD },
+      diagrams: [
+        { src: cgadFramework, alt: "Overview of the CGAD framework" },
+        { src: cgadResults, alt: "NDCG@10 and exposure fairness gap vs. position bias strength" },
+        { src: cgadScatter, alt: "Accuracy vs. fairness trade-off across configurations" },
+      ],
+    },
   ],
 
   softwareProjects: [
@@ -262,14 +261,6 @@ const portfolioData = {
       status: "Under review",
     },
     {
-      title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
-      authors: "Yilun Wu, Kaili Zhang, Hejun Huang, Yuhe Hu",
-      venue: "Research Report",
-      year: "2026",
-      link: cgadPdf,
-      status: "Published",
-    },
-    {
       title: "Is Your Test-Time Learner Actually Learning? Error Correction in Trained TTT Layers",
       authors: "Yuhe Hu, Wen Jia Hu",
       venue: "Manuscript",
@@ -290,6 +281,13 @@ const portfolioData = {
       venue: "Annals of Emergency Medicine",
       year: "2025",
       link: "https://www.annemergmed.com/current",
+      status: "Published",
+    },
+    {
+      title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
+      authors: "Yilun Wu, Kaili Zhang, Hejun Huang, Yuhe Hu",
+      venue: "Research Report",
+      year: "2026",
       status: "Published",
     },
   ],

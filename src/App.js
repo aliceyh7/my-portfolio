@@ -93,7 +93,6 @@ const portfolioData = {
       company: "Meta",
       logo: metaLogo,
       role: "Software Engineer",
-      team: "Full Time",
       link: "https://www.meta.com/",
       tech: ["Python", "Reinforcement Learning", "Evaluation", "Coding Models"],
       points: [
@@ -114,9 +113,9 @@ const portfolioData = {
 
   researchProjects: [
     {
-      type: "Workshop Paper · NeurIPS 2026",
+      type: "Publication",
       title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
-      venue: "NeurIPS 2026 Workshop on SLMs for Agentic Systems (SLM-Agents) · Accepted",
+      venue: "NeurIPS 2026 Workshop on SLMs for Agentic Systems (SLM-Agents)",
       description:
         "Compares 8-bit and 4-bit Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct on twenty deterministic tool-use tasks under five prompts, and shows that the quantization–robustness conclusion flips with the prompt and the evaluation target. Argues for matched-task comparisons, full-pipeline success rates, and uncertainty across tasks when evaluating quantized agents.",
       tags: ["LLM Agents", "Quantization", "Tool Use", "Evaluation", "Small Language Models"],
@@ -259,7 +258,7 @@ const portfolioData = {
       venue: "NeurIPS 2026 Workshop on Small Language Models for Agentic Systems (SLM-Agents)",
       year: "2026",
       link: "https://openreview.net/forum?id=QZdcb68DRP",
-      status: "Accepted",
+      status: "Published",
     },
     {
       title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
@@ -267,21 +266,6 @@ const portfolioData = {
       venue: "AAAI 2027",
       year: "2026",
       status: "Under review",
-    },
-    {
-      title: "Is Your Test-Time Learner Actually Learning? Error Correction in Trained TTT Layers",
-      authors: "Yuhe Hu, Wen Jia Hu",
-      venue: "Manuscript",
-      year: "2026",
-      status: "Manuscript",
-    },
-    {
-      title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
-      authors: "Lin Duan, Yuhe Hu, et al.",
-      venue: "IEEE Internet Computing",
-      year: "2025",
-      link: vlmPaperPdf,
-      status: "Published",
     },
     {
       title: "A Computational Model for Automated Blood Pressure Control in Critical Care",
@@ -297,6 +281,21 @@ const portfolioData = {
       venue: "Research Report",
       year: "2026",
       status: "Published",
+    },
+    {
+      title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
+      authors: "Lin Duan, Yuhe Hu, et al.",
+      venue: "IEEE Internet Computing",
+      year: "2025",
+      link: vlmPaperPdf,
+      status: "Published",
+    },
+    {
+      title: "Is Your Test-Time Learner Actually Learning? Error Correction in Trained TTT Layers",
+      authors: "Yuhe Hu, Wen Jia Hu",
+      venue: "Manuscript",
+      year: "2026",
+      status: "Manuscript",
     },
   ],
 

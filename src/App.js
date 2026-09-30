@@ -66,7 +66,7 @@ const SCHOLAR_CGAD =
 
 const portfolioData = {
   name: "Yuhe (Alice) Hu",
-  bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems, focused on scaling retrieval and ranking models and optimizing them for GPU training and inference. My background spans applied ML, security, and systems.",
+  bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems, focused on scaling retrieval and ranking models and optimizing them for GPU training and inference. Previously, I was a Software Engineer at Meta, where I built RL training environments and evaluation harnesses used to train Meta's coding models. My background spans applied ML, security, and systems.",
   profileImage: profilePic,
   contact: {
     email: "alice.yh7@outlook.com",

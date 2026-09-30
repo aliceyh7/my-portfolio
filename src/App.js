@@ -37,6 +37,9 @@ import witPhoto from "./assets/leadership/wit.png";
 import taPhoto from "./assets/leadership/ta.png";
 
 // Diagrams
+import slmFig1 from "./assets/diagrams/slm-fig1.png";
+import slmFig2 from "./assets/diagrams/slm-fig2.png";
+import slmFig3 from "./assets/diagrams/slm-fig3.png";
 import cgadFramework from "./assets/diagrams/cgad-framework.png";
 import cgadResults from "./assets/diagrams/cgad-results.png";
 import cgadScatter from "./assets/diagrams/cgad-scatter.png";
@@ -113,11 +116,16 @@ const portfolioData = {
     {
       type: "Workshop Paper · NeurIPS 2026",
       title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
-      venue: "NeurIPS 2026 Workshop on SLMs for Agentic Systems (SLM-Agents) · Accepted (Poster)",
+      venue: "NeurIPS 2026 Workshop on SLMs for Agentic Systems (SLM-Agents) · Accepted",
       description:
         "Compares 8-bit and 4-bit Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct on twenty deterministic tool-use tasks under five prompts, and shows that the quantization–robustness conclusion flips with the prompt and the evaluation target. Argues for matched-task comparisons, full-pipeline success rates, and uncertainty across tasks when evaluating quantized agents.",
       tags: ["LLM Agents", "Quantization", "Tool Use", "Evaluation", "Small Language Models"],
       links: { paper: "https://openreview.net/forum?id=QZdcb68DRP" },
+      diagrams: [
+        { src: slmFig1, alt: "8-bit minus 4-bit recovery difference across models, prompts, and evaluation targets" },
+        { src: slmFig2, alt: "One tool-chain task and the three injected fault conditions" },
+        { src: slmFig3, alt: "Success rate by GGUF quantization level under clean execution and three fault conditions" },
+      ],
     },
     {
       type: "Journal Article",
@@ -251,7 +259,7 @@ const portfolioData = {
       venue: "NeurIPS 2026 Workshop on Small Language Models for Agentic Systems (SLM-Agents)",
       year: "2026",
       link: "https://openreview.net/forum?id=QZdcb68DRP",
-      status: "Accepted (Poster)",
+      status: "Accepted",
     },
     {
       title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",

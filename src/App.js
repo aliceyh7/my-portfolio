@@ -112,6 +112,15 @@ const portfolioData = {
 
   researchProjects: [
     {
+      type: "Workshop Paper · NeurIPS 2026",
+      title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
+      venue: "NeurIPS 2026 Workshop on SLMs for Agentic Systems (SLM-Agents) · Accepted (Poster)",
+      description:
+        "Compares 8-bit and 4-bit Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct on twenty deterministic tool-use tasks under five prompts, and shows that the quantization–robustness conclusion flips with the prompt and the evaluation target. Argues for matched-task comparisons, full-pipeline success rates, and uncertainty across tasks when evaluating quantized agents.",
+      tags: ["LLM Agents", "Quantization", "Tool Use", "Evaluation", "Small Language Models"],
+      links: { paper: "https://openreview.net/forum?id=QZdcb68DRP" },
+    },
+    {
       type: "Research Report",
       title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
       venue: "Research Report, 2026",
@@ -238,6 +247,21 @@ const portfolioData = {
 
   publications: [
     {
+      title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
+      authors: "Yuhe Hu",
+      venue: "NeurIPS 2026 Workshop on Small Language Models for Agentic Systems (SLM-Agents)",
+      year: "2026",
+      link: "https://openreview.net/forum?id=QZdcb68DRP",
+      status: "Accepted (Poster)",
+    },
+    {
+      title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
+      authors: "Shangqing Shi, Meimei Zhang, Yuhe Hu, Haoliang Zhang, Saisai Hu, Zixiao Huang, Zhiming Lin, Xander Zhang",
+      venue: "AAAI 2027",
+      year: "2026",
+      status: "Under review",
+    },
+    {
       title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
       authors: "Yilun Wu, Kaili Zhang, Hejun Huang, Yuhe Hu",
       venue: "Research Report",
@@ -246,25 +270,11 @@ const portfolioData = {
       status: "Published",
     },
     {
-      title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
-      authors: "Yuhe Hu",
-      venue: "Under review",
-      year: "2026",
-      status: "Under review",
-    },
-    {
       title: "Is Your Test-Time Learner Actually Learning? Error Correction in Trained TTT Layers",
       authors: "Yuhe Hu, Wen Jia Hu",
-      venue: "Under review",
+      venue: "Manuscript",
       year: "2026",
-      status: "Under review",
-    },
-    {
-      title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
-      authors: "Shangqing Shi, Meimei Zhang, Yuhe Hu, Haoliang Zhang, Saisai Hu, Zixiao Huang, Zhiming Lin, Xander Zhang",
-      venue: "Under review",
-      year: "2026",
-      status: "Under review",
+      status: "Manuscript",
     },
     {
       title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
@@ -578,9 +588,16 @@ const HomePage = () => {
                   <p className="text-sm text-muted mt-1">{pub.authors}</p>
                   <p className="text-sm mt-1">
                     {pub.status === "Under review" ? (
-                      <span className="italic text-muted">Under review</span>
+                      <span className="italic text-muted">Under review at {pub.venue}</span>
+                    ) : pub.status === "Manuscript" ? (
+                      <span className="italic text-muted">Manuscript</span>
                     ) : (
-                      <span className="text-ink/80">{pub.venue}</span>
+                      <span className="text-ink/80">
+                        {pub.venue}
+                        {pub.status && pub.status !== "Published" && (
+                          <span className="ml-2 inline-block rounded-full border border-forest px-2 py-0.5 text-xs text-forest">{pub.status}</span>
+                        )}
+                      </span>
                     )}
                   </p>
                 </div>

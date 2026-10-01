@@ -136,10 +136,20 @@ const portfolioData = {
       ],
     },
     {
-      year: "2026",
-      title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
-      venue: "AAAI 2027",
-      status: "Under review",
+      year: "2025",
+      title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
+      venuePrefix: "Published in",
+      venue: "IEEE Internet Computing",
+      status: "Published",
+      link: vlmPaperPdf,
+      links: { paper: vlmPaperPdf },
+      description: "We evaluate commercial Large Multimodal Models (LMMs) for automated AR quality assessment using DiverseAR+, a 1,405-scene dataset, and propose a hybrid cloud–edge system for scalable, real-time evaluation under varying network conditions.",
+      tags: ["AR/VR", "Multimodal", "Evaluation", "Edge/Cloud", "Vision-Language Models"],
+      diagrams: [
+        { src: lindiagram, alt: "Pipeline diagram" },
+        { src: lindiagram2, alt: "System architecture diagram" },
+        { src: poster3photo, alt: "Poster thumbnail" },
+      ],
     },
     {
       year: "2025",
@@ -147,7 +157,7 @@ const portfolioData = {
       venuePrefix: "Published in",
       venue: "Annals of Emergency Medicine",
       venue2Prefix: "Presented at",
-      venue2: "ACEP 2025 and SAEM 2024",
+      venue2: "American College of Emergency Physicians Scientific Assembly 2025 and Society for Academic Emergency Medicine Annual Meeting 2024",
       status: "Published",
       link: "https://www.annemergmed.com/current",
       links: {
@@ -177,20 +187,10 @@ const portfolioData = {
       ],
     },
     {
-      year: "2025",
-      title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
-      venuePrefix: "Published in",
-      venue: "IEEE Internet Computing",
-      status: "Published",
-      link: vlmPaperPdf,
-      links: { paper: vlmPaperPdf },
-      description: "We evaluate commercial Large Multimodal Models (LMMs) for automated AR quality assessment using DiverseAR+, a 1,405-scene dataset, and propose a hybrid cloud–edge system for scalable, real-time evaluation under varying network conditions.",
-      tags: ["AR/VR", "Multimodal", "Evaluation", "Edge/Cloud", "Vision-Language Models"],
-      diagrams: [
-        { src: lindiagram, alt: "Pipeline diagram" },
-        { src: lindiagram2, alt: "System architecture diagram" },
-        { src: poster3photo, alt: "Poster thumbnail" },
-      ],
+      year: "2026",
+      title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
+      venue: "AAAI 2027",
+      status: "Under review",
     },
     {
       year: "2026",
@@ -448,15 +448,15 @@ const ResearchEntry = ({ item, onOpenDiagrams }) => {
             <>
               {item.venuePrefix && <span className="text-muted">{item.venuePrefix} </span>}
               <span className="font-medium text-forest">{item.venue}</span>
-              {item.venue2 && (
-                <>
-                  <span className="text-muted"> · {item.venue2Prefix} </span>
-                  <span className="font-medium text-forest">{item.venue2}</span>
-                </>
-              )}
             </>
           )}
         </p>
+        {item.venue2 && (
+          <p className="text-sm mt-1">
+            <span className="text-muted">{item.venue2Prefix} </span>
+            <span className="font-medium text-forest">{item.venue2}</span>
+          </p>
+        )}
 
         {hasBody && (
           <div className="mt-4 grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto] gap-5 items-start">

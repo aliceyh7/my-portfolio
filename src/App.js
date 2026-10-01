@@ -115,7 +115,6 @@ const portfolioData = {
     {
       year: "2026",
       title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
-      authors: "Yuhe Hu",
       venue: "NeurIPS 2026 Workshop on Small Language Models for Agentic Systems (SLM-Agents)",
       status: "Published",
       link: "https://openreview.net/forum?id=QZdcb68DRP",
@@ -131,14 +130,12 @@ const portfolioData = {
     {
       year: "2026",
       title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
-      authors: "Shangqing Shi, Meimei Zhang, Yuhe Hu, Haoliang Zhang, Saisai Hu, Zixiao Huang, Zhiming Lin, Xander Zhang",
       venue: "AAAI 2027",
       status: "Under review",
     },
     {
       year: "2025",
       title: "A Computational Model for Automated Blood Pressure Control in Critical Care",
-      authors: "Yuhe Hu, Joshua S. Broder, et al.",
       venue: "Annals of Emergency Medicine · ACEP 2025 · SAEM 2024",
       status: "Published",
       link: "https://www.annemergmed.com/current",
@@ -157,7 +154,6 @@ const portfolioData = {
     {
       year: "2026",
       title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
-      authors: "Yilun Wu, Kaili Zhang, Hejun Huang, Yuhe Hu",
       venue: "Research Report",
       status: "Published",
       links: { scholar: SCHOLAR_CGAD },
@@ -172,7 +168,6 @@ const portfolioData = {
     {
       year: "2025",
       title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
-      authors: "Lin Duan, Yuhe Hu, et al.",
       venue: "IEEE Internet Computing",
       status: "Published",
       link: vlmPaperPdf,
@@ -188,7 +183,6 @@ const portfolioData = {
     {
       year: "2026",
       title: "Is Your Test-Time Learner Actually Learning? Error Correction in Trained TTT Layers",
-      authors: "Yuhe Hu, Wen Jia Hu",
       venue: "Manuscript",
       status: "Manuscript",
     },
@@ -431,7 +425,6 @@ const ResearchEntry = ({ item, onOpenDiagrams }) => {
             <a href={item.link} target="_blank" rel="noreferrer" className="hover:text-forest transition-colors">{item.title}</a>
           ) : item.title}
         </h3>
-        <p className="text-sm text-muted mt-1">{item.authors}</p>
         <p className="text-sm mt-1">
           {item.status === "Under review" ? (
             <span className="italic text-muted">Under review at <span className="not-italic font-medium text-forest">{item.venue}</span></span>

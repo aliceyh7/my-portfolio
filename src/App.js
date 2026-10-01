@@ -593,11 +593,11 @@ const HomePage = () => {
                   <p className="text-sm text-muted mt-1">{pub.authors}</p>
                   <p className="text-sm mt-1">
                     {pub.status === "Under review" ? (
-                      <span className="italic text-muted">Under review at {pub.venue}</span>
+                      <span className="italic text-muted">Under review at <span className="not-italic font-medium text-forest">{pub.venue}</span></span>
                     ) : pub.status === "Manuscript" ? (
                       <span className="italic text-muted">Manuscript</span>
                     ) : (
-                      <span className="text-ink/80">
+                      <span className="font-medium text-forest">
                         {pub.venue}
                         {pub.status && pub.status !== "Published" && (
                           <span className="ml-2 inline-block rounded-full border border-forest px-2 py-0.5 text-xs text-forest">{pub.status}</span>

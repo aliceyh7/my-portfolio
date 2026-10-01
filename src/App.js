@@ -156,8 +156,10 @@ const portfolioData = {
       title: "A Computational Model for Automated Blood Pressure Control in Critical Care",
       venuePrefix: "Published in",
       venue: "Annals of Emergency Medicine",
-      venue2Prefix: "Presented at",
-      venue2: "American College of Emergency Physicians Scientific Assembly 2025 and Society for Academic Emergency Medicine Annual Meeting 2024",
+      presentations: [
+        "American College of Emergency Physicians Scientific Assembly 2025",
+        "Society for Academic Emergency Medicine Annual Meeting 2024",
+      ],
       status: "Published",
       link: "https://www.annemergmed.com/current",
       links: {
@@ -451,12 +453,12 @@ const ResearchEntry = ({ item, onOpenDiagrams }) => {
             </>
           )}
         </p>
-        {item.venue2 && (
-          <p className="text-sm mt-1">
-            <span className="text-muted">{item.venue2Prefix} </span>
-            <span className="font-medium text-forest">{item.venue2}</span>
+        {item.presentations?.map((v) => (
+          <p key={v} className="text-sm mt-1">
+            <span className="text-muted">Presented at </span>
+            <span className="font-medium text-forest">{v}</span>
           </p>
-        )}
+        ))}
 
         {hasBody && (
           <div className="mt-4 grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto] gap-5 items-start">

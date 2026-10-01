@@ -67,6 +67,14 @@ const SCHOLAR_CGAD =
 const portfolioData = {
   name: "Yuhe (Alice) Hu",
   bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems. Previously, I was a Software Engineer at Meta, where I built RL training environments and evaluation harnesses used to train Meta's coding models. My background spans applied ML, security, and systems.",
+  focus: {
+    lead: "Most recently, my interest has been in quantization, as shown in ",
+    links: [
+      { label: "Quantization Effects on Tool-Failure Recovery", title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs" },
+      { label: "Quantized Backdoor Attacks on MoE Models", title: "Quantized Backdoor Attacks on Mixture of Experts Models" },
+      { label: "Adaptive Model Optimization for Edge Audio Classification", title: "Adaptive Model Optimization for Audio Classification on Edge Devices" },
+    ],
+  },
   profileImage: profilePic,
   contact: {
     email: "alice.yh7@outlook.com",
@@ -337,6 +345,8 @@ const portfolioData = {
 
 // --- Small building blocks ---
 
+const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 const SectionHeading = ({ id, children }) => (
   <div className="mb-8 border-b border-sand pb-3">
     <h2 id={id} className="font-serif text-2xl md:text-3xl text-ink">{children}</h2>
@@ -380,7 +390,7 @@ const ProjectLinks = ({ links = {} }) => {
 };
 
 const ProjectCard = ({ project, onOpenDiagrams }) => (
-  <article className="bg-paper border border-sand rounded-md p-6 flex flex-col gap-4">
+  <article id={slug(project.title)} className="scroll-mt-20 bg-paper border border-sand rounded-md p-6 flex flex-col gap-4">
     <div>
       <p className="text-xs uppercase tracking-widest text-muted mb-2">{project.type}</p>
       <h3 className="font-serif text-xl leading-snug text-ink">{project.title}</h3>
@@ -416,7 +426,7 @@ const ProjectCard = ({ project, onOpenDiagrams }) => (
 const ResearchEntry = ({ item, onOpenDiagrams }) => {
   const hasBody = item.description || item.diagrams?.length > 0;
   return (
-    <li className="py-7 flex flex-col md:flex-row gap-2 md:gap-8">
+    <li id={slug(item.title)} className="scroll-mt-20 py-7 flex flex-col md:flex-row gap-2 md:gap-8">
       <span className="text-sm text-muted md:w-14 flex-shrink-0 font-mono md:pt-1">{item.year}</span>
       <div className="flex-1 min-w-0">
         <h3 className="font-serif text-xl leading-snug text-ink">
@@ -533,6 +543,15 @@ const HomePage = () => {
           <div className="flex-1 space-y-6">
             <h1 className="font-serif text-4xl md:text-5xl text-ink">Yuhe (Alice) Hu</h1>
             <p className="text-base md:text-lg leading-relaxed text-ink/80 max-w-xl">{portfolioData.bio}</p>
+            <p className="text-base md:text-lg leading-relaxed text-ink/80 max-w-xl">
+              {portfolioData.focus.lead}
+              {portfolioData.focus.links.map((l, i, arr) => (
+                <React.Fragment key={l.title}>
+                  <a href={`#${slug(l.title)}`} className="text-forest underline decoration-sand underline-offset-4 hover:decoration-forest transition-colors">{l.label}</a>
+                  {i < arr.length - 2 ? ", " : i === arr.length - 2 ? ", and " : "."}
+                </React.Fragment>
+              ))}
+            </p>
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
               <TextLink href={contact.linkedin}>LinkedIn</TextLink>
               <TextLink href={contact.github}>GitHub</TextLink>

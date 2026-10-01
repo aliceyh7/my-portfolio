@@ -123,6 +123,7 @@ const portfolioData = {
     {
       year: "2026",
       title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
+      venuePrefix: "To appear at",
       venue: "NeurIPS 2026 Workshop on Small Language Models for Agentic Systems (SLM-Agents)",
       status: "Published",
       links: {},
@@ -143,7 +144,10 @@ const portfolioData = {
     {
       year: "2025",
       title: "A Computational Model for Automated Blood Pressure Control in Critical Care",
-      venue: "Annals of Emergency Medicine · ACEP 2025 · SAEM 2024",
+      venuePrefix: "Published in",
+      venue: "Annals of Emergency Medicine",
+      venue2Prefix: "Presented at",
+      venue2: "ACEP 2025 and SAEM 2024",
       status: "Published",
       link: "https://www.annemergmed.com/current",
       links: {
@@ -175,6 +179,7 @@ const portfolioData = {
     {
       year: "2025",
       title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
+      venuePrefix: "Published in",
       venue: "IEEE Internet Computing",
       status: "Published",
       link: vlmPaperPdf,
@@ -440,7 +445,16 @@ const ResearchEntry = ({ item, onOpenDiagrams }) => {
           ) : item.status === "Manuscript" ? (
             <span className="italic text-muted">Manuscript</span>
           ) : (
-            <span className="font-medium text-forest">{item.venue}</span>
+            <>
+              {item.venuePrefix && <span className="text-muted">{item.venuePrefix} </span>}
+              <span className="font-medium text-forest">{item.venue}</span>
+              {item.venue2 && (
+                <>
+                  <span className="text-muted"> · {item.venue2Prefix} </span>
+                  <span className="font-medium text-forest">{item.venue2}</span>
+                </>
+              )}
+            </>
           )}
         </p>
 

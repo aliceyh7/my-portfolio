@@ -111,15 +111,17 @@ const portfolioData = {
     },
   ],
 
-  researchProjects: [
+  research: [
     {
-      type: "Publication",
+      year: "2026",
       title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
-      venue: "NeurIPS 2026 Workshop on SLMs for Agentic Systems (SLM-Agents)",
-      description:
-        "Compares 8-bit and 4-bit Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct on twenty deterministic tool-use tasks under five prompts, and shows that the quantization–robustness conclusion flips with the prompt and the evaluation target. Argues for matched-task comparisons, full-pipeline success rates, and uncertainty across tasks when evaluating quantized agents.",
-      tags: ["LLM Agents", "Quantization", "Tool Use", "Evaluation", "Small Language Models"],
+      authors: "Yuhe Hu",
+      venue: "NeurIPS 2026 Workshop on Small Language Models for Agentic Systems (SLM-Agents)",
+      status: "Published",
+      link: "https://openreview.net/forum?id=QZdcb68DRP",
       links: { paper: "https://openreview.net/forum?id=QZdcb68DRP" },
+      description: "Compares 8-bit and 4-bit Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct on twenty deterministic tool-use tasks under five prompts, and shows that the quantization–robustness conclusion flips with the prompt and the evaluation target. Argues for matched-task comparisons, full-pipeline success rates, and uncertainty across tasks when evaluating quantized agents.",
+      tags: ["LLM Agents", "Quantization", "Tool Use", "Evaluation", "Small Language Models"],
       diagrams: [
         { src: slmFig1, alt: "8-bit minus 4-bit recovery difference across models, prompts, and evaluation targets" },
         { src: slmFig2, alt: "One tool-chain task and the three injected fault conditions" },
@@ -127,13 +129,56 @@ const portfolioData = {
       ],
     },
     {
-      type: "Journal Article",
+      year: "2026",
+      title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
+      authors: "Shangqing Shi, Meimei Zhang, Yuhe Hu, Haoliang Zhang, Saisai Hu, Zixiao Huang, Zhiming Lin, Xander Zhang",
+      venue: "AAAI 2027",
+      status: "Under review",
+    },
+    {
+      year: "2025",
+      title: "A Computational Model for Automated Blood Pressure Control in Critical Care",
+      authors: "Yuhe Hu, Joshua S. Broder, et al.",
+      venue: "Annals of Emergency Medicine · ACEP 2025 · SAEM 2024",
+      status: "Published",
+      link: "https://www.annemergmed.com/current",
+      links: {
+        github: "https://github.com/aliceyh7/Autonomous-BP-for-Hypertensive-Crises",
+        paper: "https://www.annemergmed.com/current",
+        poster: bpPresentationPdf,
+      },
+      description: "A computational simulation model for closed-loop blood pressure control in critical care, aiming for stable automated BP regulation. Accepted for publication in Annals of Emergency Medicine and presented at ACEP 2025 and SAEM 2024.",
+      tags: ["Healthcare", "Control", "Simulation", "Critical Care"],
+      diagrams: [
+        { src: bpdiagram, alt: "System architecture diagram" },
+        { src: bpPosterPhoto, alt: "Poster thumbnail" },
+      ],
+    },
+    {
+      year: "2026",
+      title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
+      authors: "Yilun Wu, Kaili Zhang, Hejun Huang, Yuhe Hu",
+      venue: "Research Report",
+      status: "Published",
+      links: { scholar: SCHOLAR_CGAD },
+      description: "CGAD is a two-layer framework for learning to rank from biased click feedback: it first estimates group-conditioned examination propensities, then trains the ranker with group-aware counterfactual risk minimization and a fairness regularizer. On Criteo and Avazu it keeps ranking accuracy competitive while reducing cross-group exposure disparity.",
+      tags: ["Learning to Rank", "Counterfactual", "Fairness", "Computational Advertising"],
+      diagrams: [
+        { src: cgadFramework, alt: "Overview of the CGAD framework" },
+        { src: cgadResults, alt: "NDCG@10 and exposure fairness gap vs. position bias strength" },
+        { src: cgadScatter, alt: "Accuracy vs. fairness trade-off across configurations" },
+      ],
+    },
+    {
+      year: "2025",
       title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
-      venue: "IEEE Internet Computing, 2025",
-      description:
-        "We evaluate commercial Large Multimodal Models (LMMs) for automated AR quality assessment using DiverseAR+, a 1,405-scene dataset, and propose a hybrid cloud–edge system for scalable, real-time evaluation under varying network conditions.",
-      tags: ["AR/VR", "Multimodal", "Evaluation", "Edge/Cloud", "Vision-Language Models"],
+      authors: "Lin Duan, Yuhe Hu, et al.",
+      venue: "IEEE Internet Computing",
+      status: "Published",
+      link: vlmPaperPdf,
       links: { paper: vlmPaperPdf },
+      description: "We evaluate commercial Large Multimodal Models (LMMs) for automated AR quality assessment using DiverseAR+, a 1,405-scene dataset, and propose a hybrid cloud–edge system for scalable, real-time evaluation under varying network conditions.",
+      tags: ["AR/VR", "Multimodal", "Evaluation", "Edge/Cloud", "Vision-Language Models"],
       diagrams: [
         { src: lindiagram, alt: "Pipeline diagram" },
         { src: lindiagram2, alt: "System architecture diagram" },
@@ -141,22 +186,15 @@ const portfolioData = {
       ],
     },
     {
-      type: "Publication",
-      title: "A Computational Model for Automated Blood Pressure Control in Critical Care",
-      venue: "Annals of Emergency Medicine, 2025 · ACEP 2025 · SAEM 2024",
-      description:
-        "A computational simulation model for closed-loop blood pressure control in critical care, aiming for stable automated BP regulation. Accepted for publication in Annals of Emergency Medicine and presented at ACEP 2025 and SAEM 2024.",
-      tags: ["Healthcare", "Control", "Simulation", "Critical Care"],
-      links: {
-        github: "https://github.com/aliceyh7/Autonomous-BP-for-Hypertensive-Crises",
-        paper: "https://www.annemergmed.com/current",
-        poster: bpPresentationPdf,
-      },
-      diagrams: [
-        { src: bpdiagram, alt: "System architecture diagram" },
-        { src: bpPosterPhoto, alt: "Poster thumbnail" },
-      ],
+      year: "2026",
+      title: "Is Your Test-Time Learner Actually Learning? Error Correction in Trained TTT Layers",
+      authors: "Yuhe Hu, Wen Jia Hu",
+      venue: "Manuscript",
+      status: "Manuscript",
     },
+  ],
+
+  softwareProjects: [
     {
       type: "Course Project",
       title: "Quantized Backdoor Attacks on Mixture of Experts Models",
@@ -191,23 +229,6 @@ const portfolioData = {
       links: { paper: ece661Pdf, slides: ece661SlidesPdf, github: "https://github.com/aliceyh7/ece661_final_project" },
       diagrams: [{ src: yiranchenDiagram, alt: "Optimization pipeline diagram" }],
     },
-    {
-      type: "Research Report",
-      title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
-      venue: "Research Report, 2026",
-      description:
-        "CGAD is a two-layer framework for learning to rank from biased click feedback: it first estimates group-conditioned examination propensities, then trains the ranker with group-aware counterfactual risk minimization and a fairness regularizer. On Criteo and Avazu it keeps ranking accuracy competitive while reducing cross-group exposure disparity.",
-      tags: ["Learning to Rank", "Counterfactual", "Fairness", "Computational Advertising"],
-      links: { scholar: SCHOLAR_CGAD },
-      diagrams: [
-        { src: cgadFramework, alt: "Overview of the CGAD framework" },
-        { src: cgadResults, alt: "NDCG@10 and exposure fairness gap vs. position bias strength" },
-        { src: cgadScatter, alt: "Accuracy vs. fairness trade-off across configurations" },
-      ],
-    },
-  ],
-
-  softwareProjects: [
     {
       type: "Hardware / FPGA",
       title: "MIPS Pipelined Processor & Word Game Engine",
@@ -248,54 +269,6 @@ const portfolioData = {
         { src: amazondiagram, alt: "System architecture diagram" },
         { src: amazondiagram2, alt: "Database schema diagram" },
       ],
-    },
-  ],
-
-  publications: [
-    {
-      title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
-      authors: "Yuhe Hu",
-      venue: "NeurIPS 2026 Workshop on Small Language Models for Agentic Systems (SLM-Agents)",
-      year: "2026",
-      link: "https://openreview.net/forum?id=QZdcb68DRP",
-      status: "Published",
-    },
-    {
-      title: "Open-World Classification as Bayesian Model Selection over Evolving Label Spaces",
-      authors: "Shangqing Shi, Meimei Zhang, Yuhe Hu, Haoliang Zhang, Saisai Hu, Zixiao Huang, Zhiming Lin, Xander Zhang",
-      venue: "AAAI 2027",
-      year: "2026",
-      status: "Under review",
-    },
-    {
-      title: "A Computational Model for Automated Blood Pressure Control in Critical Care",
-      authors: "Yuhe Hu, Joshua S. Broder, et al.",
-      venue: "Annals of Emergency Medicine",
-      year: "2025",
-      link: "https://www.annemergmed.com/current",
-      status: "Published",
-    },
-    {
-      title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
-      authors: "Yilun Wu, Kaili Zhang, Hejun Huang, Yuhe Hu",
-      venue: "Research Report",
-      year: "2026",
-      status: "Published",
-    },
-    {
-      title: "Probing the Augmented Reality Scene Analysis Capabilities of Large Multimodal Models",
-      authors: "Lin Duan, Yuhe Hu, et al.",
-      venue: "IEEE Internet Computing",
-      year: "2025",
-      link: vlmPaperPdf,
-      status: "Published",
-    },
-    {
-      title: "Is Your Test-Time Learner Actually Learning? Error Correction in Trained TTT Layers",
-      authors: "Yuhe Hu, Wen Jia Hu",
-      venue: "Manuscript",
-      year: "2026",
-      status: "Manuscript",
     },
   ],
 
@@ -447,6 +420,62 @@ const ProjectCard = ({ project, onOpenDiagrams }) => (
   </article>
 );
 
+const ResearchEntry = ({ item, onOpenDiagrams }) => {
+  const hasBody = item.description || item.diagrams?.length > 0;
+  return (
+    <li className="py-7 flex flex-col md:flex-row gap-2 md:gap-8">
+      <span className="text-sm text-muted md:w-14 flex-shrink-0 font-mono md:pt-1">{item.year}</span>
+      <div className="flex-1 min-w-0">
+        <h3 className="font-serif text-xl leading-snug text-ink">
+          {item.link && item.link !== "#" ? (
+            <a href={item.link} target="_blank" rel="noreferrer" className="hover:text-forest transition-colors">{item.title}</a>
+          ) : item.title}
+        </h3>
+        <p className="text-sm text-muted mt-1">{item.authors}</p>
+        <p className="text-sm mt-1">
+          {item.status === "Under review" ? (
+            <span className="italic text-muted">Under review at <span className="not-italic font-medium text-forest">{item.venue}</span></span>
+          ) : item.status === "Manuscript" ? (
+            <span className="italic text-muted">Manuscript</span>
+          ) : (
+            <span className="font-medium text-forest">{item.venue}</span>
+          )}
+        </p>
+
+        {hasBody && (
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto] gap-5 items-start">
+            {item.description && (
+              <p className="text-sm leading-relaxed text-ink/80 max-w-2xl">{item.description}</p>
+            )}
+            {item.diagrams?.length > 0 && (
+              <div className="flex gap-2 md:justify-end">
+                {item.diagrams.slice(0, 3).map((d, i) => (
+                  <button
+                    type="button"
+                    key={i}
+                    onClick={() => onOpenDiagrams?.(item)}
+                    className="w-24 h-16 md:w-28 md:h-20 flex-shrink-0 rounded border border-sand bg-white overflow-hidden hover:border-forest transition-colors"
+                    title={d.alt || "Figure"}
+                  >
+                    <img src={d.src} alt={d.alt || `Figure ${i + 1}`} className="w-full h-full object-contain p-1" loading="lazy" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {(item.tags?.length > 0 || item.links) && (
+          <div className="mt-3 flex flex-wrap items-baseline gap-x-5 gap-y-1">
+            <ProjectLinks links={item.links} />
+            {item.tags?.length > 0 && <span className="text-xs text-muted">{item.tags.join(" · ")}</span>}
+          </div>
+        )}
+      </div>
+    </li>
+  );
+};
+
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
   return (
@@ -498,7 +527,6 @@ const HomePage = () => {
           <div className="hidden md:flex gap-7 text-sm text-muted">
             <a href="#experience" className="hover:text-ink">Experience</a>
             <a href="#research" className="hover:text-ink">Research</a>
-            <a href="#publications" className="hover:text-ink">Publications</a>
             <a href="#software" className="hover:text-ink">Projects</a>
             <a href="#posters" className="hover:text-ink">Posters</a>
             <a href="#leadership" className="hover:text-ink">Leadership</a>
@@ -570,43 +598,9 @@ const HomePage = () => {
         {/* Research */}
         <section>
           <SectionHeading id="research">Research</SectionHeading>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {portfolioData.researchProjects.map((item) => (
-              <ProjectCard key={item.title} project={item} onOpenDiagrams={setProjectModal} />
-            ))}
-          </div>
-        </section>
-
-        {/* Publications */}
-        <section>
-          <SectionHeading id="publications">Publications</SectionHeading>
           <ol className="divide-y divide-sand border-t border-b border-sand">
-            {portfolioData.publications.map((pub) => (
-              <li key={pub.title} className="py-5 flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
-                <span className="text-sm text-muted md:w-14 flex-shrink-0 font-mono">{pub.year}</span>
-                <div className="flex-1">
-                  <h3 className="font-serif text-lg leading-snug text-ink">
-                    {pub.link && pub.link !== "#" ? (
-                      <a href={pub.link} target="_blank" rel="noreferrer" className="hover:text-forest transition-colors">{pub.title}</a>
-                    ) : pub.title}
-                  </h3>
-                  <p className="text-sm text-muted mt-1">{pub.authors}</p>
-                  <p className="text-sm mt-1">
-                    {pub.status === "Under review" ? (
-                      <span className="italic text-muted">Under review at <span className="not-italic font-medium text-forest">{pub.venue}</span></span>
-                    ) : pub.status === "Manuscript" ? (
-                      <span className="italic text-muted">Manuscript</span>
-                    ) : (
-                      <span className="font-medium text-forest">
-                        {pub.venue}
-                        {pub.status && pub.status !== "Published" && (
-                          <span className="ml-2 inline-block rounded-full border border-forest px-2 py-0.5 text-xs text-forest">{pub.status}</span>
-                        )}
-                      </span>
-                    )}
-                  </p>
-                </div>
-              </li>
+            {portfolioData.research.map((item) => (
+              <ResearchEntry key={item.title} item={item} onOpenDiagrams={setProjectModal} />
             ))}
           </ol>
         </section>

@@ -68,7 +68,7 @@ const portfolioData = {
   name: "Yuhe (Alice) Hu",
   bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems. Previously, I was a Software Engineer at Meta, where I built RL training environments and evaluation harnesses used to train Meta's coding models. My background spans applied ML, security, and systems.",
   focus: {
-    lead: "Most recently I've been working on quantization and its effects on model behavior, as shown in ",
+    lead: "Most recently I've been learning about quantization and its effects on model behavior, as shown in these projects",
     links: [
       { label: "Quantization Effects on Tool-Failure Recovery", title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs" },
       { label: "Quantized Backdoor Attacks on MoE Models", title: "Quantized Backdoor Attacks on Mixture of Experts Models" },
@@ -545,12 +545,18 @@ const HomePage = () => {
             <p className="text-base md:text-lg leading-relaxed text-ink/80 max-w-xl">{portfolioData.bio}</p>
             <p className="text-base md:text-lg leading-relaxed text-ink/80 max-w-xl">
               {portfolioData.focus.lead}
-              {portfolioData.focus.links.map((l, i, arr) => (
-                <React.Fragment key={l.title}>
-                  <a href={`#${slug(l.title)}`} className="text-forest underline decoration-sand underline-offset-4 hover:decoration-forest transition-colors">{l.label}</a>
-                  {i < arr.length - 2 ? ", " : i === arr.length - 2 ? ", and " : "."}
-                </React.Fragment>
+              {portfolioData.focus.links.map((l, i) => (
+                <sup key={l.title} className="ml-1">
+                  <a
+                    href={`#${slug(l.title)}`}
+                    title={l.title}
+                    className="text-forest font-medium hover:underline decoration-forest underline-offset-2"
+                  >
+                    {i + 1}
+                  </a>
+                </sup>
               ))}
+              .
             </p>
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
               <TextLink href={contact.linkedin}>LinkedIn</TextLink>

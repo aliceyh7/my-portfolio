@@ -68,7 +68,7 @@ const portfolioData = {
   name: "Yuhe (Alice) Hu",
   bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems. Previously, I was a Software Engineer at Meta, where I built RL training environments and evaluation harnesses used to train Meta's coding models. My background spans applied ML, security, and systems.",
   focus: {
-    lead: "Most recently, my interest has been in quantization, as shown in ",
+    lead: "Most recently I've been working on quantization and its effects on model behavior, as shown in ",
     links: [
       { label: "Quantization Effects on Tool-Failure Recovery", title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs" },
       { label: "Quantized Backdoor Attacks on MoE Models", title: "Quantized Backdoor Attacks on Mixture of Experts Models" },

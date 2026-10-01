@@ -117,8 +117,7 @@ const portfolioData = {
       title: "Quantization Effects on Tool-Failure Recovery Vary Across Prompts and Evaluation Designs",
       venue: "NeurIPS 2026 Workshop on Small Language Models for Agentic Systems (SLM-Agents)",
       status: "Published",
-      link: "https://openreview.net/forum?id=QZdcb68DRP",
-      links: { paper: "https://openreview.net/forum?id=QZdcb68DRP" },
+      links: {},
       description: "Compares 8-bit and 4-bit Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct on twenty deterministic tool-use tasks under five prompts, and shows that the quantization–robustness conclusion flips with the prompt and the evaluation target. Argues for matched-task comparisons, full-pipeline success rates, and uncertainty across tasks when evaluating quantized agents.",
       tags: ["LLM Agents", "Quantization", "Tool Use", "Evaluation", "Small Language Models"],
       diagrams: [

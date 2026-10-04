@@ -101,6 +101,7 @@ const portfolioData = {
       tech: ["Python", "Reinforcement Learning", "Evaluation", "Coding Models"],
       points: [
         "RL training environments and eval harnesses used to train Meta's coding models.",
+        "Received rating \"Greatly Exceeds Expectations\" (GE).",
       ],
     },
     {

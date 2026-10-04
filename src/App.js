@@ -60,9 +60,6 @@ import sbom from "./assets/diagrams/sbom.png";
 import sbom2 from "./assets/diagrams/sbom2.png";
 
 // --- Data ---
-const SCHOLAR_PROFILE = "https://scholar.google.com/citations?hl=en&user=qB1bTbEAAAAJ";
-const SCHOLAR_CGAD =
-  "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=qB1bTbEAAAAJ&citation_for_view=qB1bTbEAAAAJ:u-x6o8ySG0sC";
 
 const portfolioData = {
   name: "Yuhe (Alice) Hu",
@@ -80,7 +77,6 @@ const portfolioData = {
     email: "alice.yh7@outlook.com",
     linkedin: "https://linkedin.com/in/aliceh7",
     github: "https://github.com/aliceyh7",
-    scholar: SCHOLAR_PROFILE,
     cv: "#",
   },
 
@@ -179,7 +175,7 @@ const portfolioData = {
       title: "Counterfactual Group-Aware Debiasing for Fair Ad Ranking under Exposure Confounding",
       venue: "Research Report",
       status: "Published",
-      links: { scholar: SCHOLAR_CGAD },
+      links: {},
       description: "CGAD is a two-layer framework for learning to rank from biased click feedback: it first estimates group-conditioned examination propensities, then trains the ranker with group-aware counterfactual risk minimization and a fairness regularizer. On Criteo and Avazu it keeps ranking accuracy competitive while reducing cross-group exposure disparity.",
       tags: ["Learning to Rank", "Counterfactual", "Fairness", "Computational Advertising"],
       diagrams: [
@@ -577,7 +573,6 @@ const HomePage = () => {
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
               <TextLink href={contact.linkedin}>LinkedIn</TextLink>
               <TextLink href={contact.github}>GitHub</TextLink>
-              <TextLink href={contact.scholar}>Google Scholar</TextLink>
               <TextLink href={`mailto:${contact.email}`} external={false}>Email</TextLink>
             </div>
           </div>

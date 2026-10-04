@@ -627,7 +627,7 @@ const HomePage = () => {
         {/* Research */}
         <section>
           <SectionHeading id="research">Research</SectionHeading>
-          <ol className="divide-y divide-sand border-t border-b border-sand">
+          <ol className="divide-y divide-sand border-b border-sand">
             {portfolioData.research.map((item) => (
               <ResearchEntry key={item.title} item={item} onOpenDiagrams={setProjectModal} />
             ))}

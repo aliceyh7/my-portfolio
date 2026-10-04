@@ -6,7 +6,6 @@ import profilePic from './assets/Profile_Pic.jpg';
 import metaLogo from './assets/logos/meta.png';
 import adobeLogo from './assets/logos/adobe.png';
 import netflixLogo from './assets/logos/netflix.svg';
-import sigLogo from './assets/logos/sig.svg';
 
 // Research Paper PDFs
 import vlmPaperPdf from "./assets/papers/IEEE.pdf";
@@ -113,17 +112,6 @@ const portfolioData = {
       link: "https://www.adobe.com/sign",
       points: [
         "Credential and identity verification services for Adobe's e-signature platform.",
-      ],
-    },
-    {
-      company: "Susquehanna International Group (SIG)",
-      logo: sigLogo,
-      role: "Discovery Technology Program",
-      team: "Systematic Trading & Execution",
-      link: "https://sig.com/",
-      tech: ["C++", "Concurrency", "Low Latency", "Market Microstructure"],
-      points: [
-        "Built a high-frequency limit order book simulator in C++ with O(1) price-level access, and tuned thread pools and concurrency models for low-latency trade execution.",
       ],
     },
   ],

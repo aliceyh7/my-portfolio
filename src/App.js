@@ -659,7 +659,7 @@ const HomePage = () => {
           {portfolioData.research.length > FEATURED_RESEARCH && (
             <div className="mt-6">
               <Link to="/research" className="inline-flex items-center gap-1.5 text-sm text-forest hover:underline decoration-sand underline-offset-4 hover:decoration-forest">
-                See all {portfolioData.research.length} papers
+                See more
                 <span aria-hidden="true">&rarr;</span>
               </Link>
             </div>

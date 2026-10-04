@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import { X } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 
 import profilePic from './assets/Profile_Pic.jpg';
 import metaLogo from './assets/logos/meta.png';
@@ -347,6 +348,8 @@ const portfolioData = {
   },
 };
 
+const FEATURED_RESEARCH = 3;
+
 // --- Small building blocks ---
 
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -510,6 +513,27 @@ const Modal = ({ isOpen, onClose, children }) => {
   );
 };
 
+const FiguresModal = ({ project, onClose }) => (
+  <Modal isOpen={!!project} onClose={onClose}>
+    {project && (
+      <div>
+        <h3 className="font-serif text-2xl text-ink">{project.title}</h3>
+        <p className="text-sm text-muted mt-1">{project.venue || project.type}</p>
+        <div className="mt-6 space-y-6">
+          {(project.diagrams || []).map((d, i) => (
+            <figure key={i} className="border border-sand rounded bg-white overflow-hidden">
+              <a href={d.src} target="_blank" rel="noreferrer" title="Open image in new tab">
+                <img src={d.src} alt={d.alt || `Figure ${i + 1}`} className="w-full object-contain max-h-[70vh]" loading="lazy" />
+              </a>
+              <figcaption className="px-4 py-3 text-sm text-muted">{d.alt || `Figure ${i + 1}`}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    )}
+  </Modal>
+);
+
 const PdfPage = ({ title, src }) => (
   <div className="min-h-screen bg-cream">
     <div className="max-w-6xl mx-auto px-4 py-6">
@@ -628,10 +652,18 @@ const HomePage = () => {
         <section>
           <SectionHeading id="research">Research</SectionHeading>
           <ol className="divide-y divide-sand border-b border-sand">
-            {portfolioData.research.map((item) => (
+            {portfolioData.research.slice(0, FEATURED_RESEARCH).map((item) => (
               <ResearchEntry key={item.title} item={item} onOpenDiagrams={setProjectModal} />
             ))}
           </ol>
+          {portfolioData.research.length > FEATURED_RESEARCH && (
+            <div className="mt-6">
+              <Link to="/research" className="inline-flex items-center gap-1.5 text-sm text-forest hover:underline decoration-sand underline-offset-4 hover:decoration-forest">
+                See all {portfolioData.research.length} papers
+                <span aria-hidden="true">&rarr;</span>
+              </Link>
+            </div>
+          )}
         </section>
 
         {/* Software projects */}
@@ -745,39 +777,65 @@ const HomePage = () => {
         )}
       </Modal>
 
-      {/* Figures modal */}
-      <Modal isOpen={!!projectModal} onClose={() => setProjectModal(null)}>
-        {projectModal && (
-          <div>
-            <h3 className="font-serif text-2xl text-ink">{projectModal.title}</h3>
-            <p className="text-sm text-muted mt-1">{projectModal.venue || projectModal.type}</p>
-            <div className="mt-6 space-y-6">
-              {(projectModal.diagrams || []).map((d, i) => (
-                <figure key={i} className="border border-sand rounded bg-white overflow-hidden">
-                  <a href={d.src} target="_blank" rel="noreferrer" title="Open image in new tab">
-                    <img src={d.src} alt={d.alt || `Figure ${i + 1}`} className="w-full object-contain max-h-[70vh]" loading="lazy" />
-                  </a>
-                  <figcaption className="px-4 py-3 text-sm text-muted">{d.alt || `Figure ${i + 1}`}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
-        )}
-      </Modal>
+      <FiguresModal project={projectModal} onClose={() => setProjectModal(null)} />
     </div>
   );
+};
+
+// --- Research page ---
+
+const ResearchPage = () => {
+  const [projectModal, setProjectModal] = useState(null);
+  return (
+    <div className="min-h-screen bg-cream text-ink font-sans pb-16">
+      <nav className="sticky top-0 w-full bg-cream/95 backdrop-blur border-b border-sand z-50">
+        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+          <Link to="/" className="font-serif text-lg tracking-wide text-ink">Y.H.</Link>
+          <Link to="/" className="text-sm text-muted hover:text-ink inline-flex items-center gap-1.5">
+            <span aria-hidden="true">&larr;</span> Home
+          </Link>
+        </div>
+      </nav>
+      <main className="max-w-5xl mx-auto px-6 pt-16 md:pt-20">
+        <section>
+          <SectionHeading id="research">Research</SectionHeading>
+          <ol className="divide-y divide-sand border-b border-sand">
+            {portfolioData.research.map((item) => (
+              <ResearchEntry key={item.title} item={item} onOpenDiagrams={setProjectModal} />
+            ))}
+          </ol>
+        </section>
+      </main>
+      <FiguresModal project={projectModal} onClose={() => setProjectModal(null)} />
+    </div>
+  );
+};
+
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      const el = document.getElementById(hash.slice(1));
+      if (el) { el.scrollIntoView(); return; }
+    }
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
+  return null;
 };
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/research" element={<ResearchPage />} />
         <Route path="/acep_poster" element={<PdfPage title="ACEP Poster" src={bpPresentationPdf} />} />
         <Route path="/fall_2023" element={<PdfPage title="Poster 1 (Fall 2023)" src={poster1} />} />
         <Route path="/spring_2024" element={<PdfPage title="Poster 2 (Spring 2024)" src={poster2} />} />
         <Route path="/spring_2025" element={<PdfPage title="Poster 3 (Spring 2025)" src={poster3} />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }

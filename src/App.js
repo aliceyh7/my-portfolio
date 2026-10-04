@@ -433,7 +433,7 @@ const ProjectCard = ({ project, onOpenDiagrams }) => (
 const ResearchEntry = ({ item, onOpenDiagrams }) => {
   const hasBody = item.description || item.diagrams?.length > 0;
   return (
-    <li id={slug(item.title)} className="scroll-mt-20 py-7 flex flex-col md:flex-row gap-2 md:gap-8">
+    <li id={slug(item.title)} className="scroll-mt-20 py-7 first:pt-0 flex flex-col md:flex-row gap-2 md:gap-8">
       <span className="text-sm text-muted md:w-14 flex-shrink-0 font-mono md:pt-1">{item.year}</span>
       <div className="flex-1 min-w-0">
         <h3 className="font-serif text-xl leading-snug text-ink">

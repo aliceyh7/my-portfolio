@@ -64,7 +64,7 @@ import sbom2 from "./assets/diagrams/sbom2.png";
 
 const portfolioData = {
   name: "Yuhe (Alice) Hu",
-  intro: "Hi, I'm Yuhe (Alice) Hu. I recently graduated from Duke University with a double major in Electrical & Computer Engineering and Computer Science. I grew up in Beijing and Toronto, and have since called Durham and the Bay Area home.",
+  intro: "Hi, I'm Yuhe (Alice) Hu. I recently graduated from Duke University with a double major in Electrical & Computer Engineering and Computer Science. I've lived in Beijing, Toronto, Durham, and now the Bay Area.",
   bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems. Previously, I was a Software Engineer at Meta, where I built RL training environments and evaluation harnesses used to train Meta's coding models. My background spans applied ML, security, and systems.",
   focus: {
     lead: "Most recently I've been learning about quantization and its effects on model behavior, and have built a few related projects",

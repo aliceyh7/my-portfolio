@@ -64,7 +64,7 @@ import sbom2 from "./assets/diagrams/sbom2.png";
 
 const portfolioData = {
   name: "Yuhe (Alice) Hu",
-  intro: "Hi, I'm Yuhe (Alice) Hu. I recently completed my Bachelor of Science at Duke University, where I double majored in Electrical/Computer Engineering and Computer Science. I've lived in Beijing, Toronto, Durham, and now the Bay Area.",
+  intro: "I recently completed my Bachelor of Science at Duke University, where I double majored in Electrical/Computer Engineering and Computer Science. I've lived in Beijing, Toronto, Durham, and now the Bay Area.",
   bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems. Previously, I was a Software Engineer at Meta, where I built RL training environments and evaluation harnesses used to train Meta's coding models. My background spans applied ML, security, and systems.",
   focus: {
     lead: "Most recently I've been learning about quantization and its effects on model behavior, and have built a few related projects",
@@ -581,8 +581,8 @@ const HomePage = () => {
         <section className="flex flex-col-reverse md:flex-row md:items-center gap-10">
           <div className="flex-1 space-y-6">
             <h1 className="font-serif text-4xl md:text-5xl text-ink">Yuhe (Alice) Hu</h1>
-            <p className="text-sm md:text-base leading-relaxed text-ink/80 max-w-xl">{portfolioData.intro}</p>
             <p className="text-sm md:text-base leading-relaxed text-ink/80 max-w-xl">{portfolioData.bio}</p>
+            <p className="text-sm md:text-base leading-relaxed text-ink/80 max-w-xl">{portfolioData.intro}</p>
             <p className="text-sm md:text-base leading-relaxed text-ink/80 max-w-xl">
               {portfolioData.focus.lead}
               {portfolioData.focus.links.map((l, i) => (

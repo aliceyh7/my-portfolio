@@ -581,9 +581,9 @@ const HomePage = () => {
         <section className="flex flex-col-reverse md:flex-row md:items-center gap-10">
           <div className="flex-1 space-y-6">
             <h1 className="font-serif text-4xl md:text-5xl text-ink">Yuhe (Alice) Hu</h1>
-            <p className="text-base md:text-lg leading-relaxed text-ink/80 max-w-xl">{portfolioData.intro}</p>
-            <p className="text-base md:text-lg leading-relaxed text-ink/80 max-w-xl">{portfolioData.bio}</p>
-            <p className="text-base md:text-lg leading-relaxed text-ink/80 max-w-xl">
+            <p className="text-sm md:text-base leading-relaxed text-ink/80 max-w-xl">{portfolioData.intro}</p>
+            <p className="text-sm md:text-base leading-relaxed text-ink/80 max-w-xl">{portfolioData.bio}</p>
+            <p className="text-sm md:text-base leading-relaxed text-ink/80 max-w-xl">
               {portfolioData.focus.lead}
               {portfolioData.focus.links.map((l, i) => (
                 <sup key={l.title} className="ml-1">

@@ -349,6 +349,7 @@ const portfolioData = {
 };
 
 const FEATURED_RESEARCH = 3;
+const FEATURED_PROJECTS = 4;
 
 // --- Small building blocks ---
 
@@ -670,10 +671,18 @@ const HomePage = () => {
         <section>
           <SectionHeading id="software">Projects</SectionHeading>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {portfolioData.softwareProjects.map((item) => (
+            {portfolioData.softwareProjects.slice(0, FEATURED_PROJECTS).map((item) => (
               <ProjectCard key={item.title} project={item} onOpenDiagrams={setProjectModal} />
             ))}
           </div>
+          {portfolioData.softwareProjects.length > FEATURED_PROJECTS && (
+            <div className="mt-6">
+              <Link to="/projects" className="inline-flex items-center gap-1.5 text-sm text-forest hover:underline decoration-sand underline-offset-4 hover:decoration-forest">
+                See more
+                <span aria-hidden="true">&rarr;</span>
+              </Link>
+            </div>
+          )}
         </section>
 
         {/* Posters */}
@@ -782,32 +791,53 @@ const HomePage = () => {
   );
 };
 
-// --- Research page ---
+// --- Secondary pages ---
+
+const SubPage = ({ children }) => (
+  <div className="min-h-screen bg-cream text-ink font-sans pb-16">
+    <nav className="sticky top-0 w-full bg-cream/95 backdrop-blur border-b border-sand z-50">
+      <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+        <Link to="/" className="font-serif text-lg tracking-wide text-ink">Y.H.</Link>
+        <Link to="/" className="text-sm text-muted hover:text-ink inline-flex items-center gap-1.5">
+          <span aria-hidden="true">&larr;</span> Home
+        </Link>
+      </div>
+    </nav>
+    <main className="max-w-5xl mx-auto px-6 pt-16 md:pt-20">{children}</main>
+  </div>
+);
 
 const ResearchPage = () => {
   const [projectModal, setProjectModal] = useState(null);
   return (
-    <div className="min-h-screen bg-cream text-ink font-sans pb-16">
-      <nav className="sticky top-0 w-full bg-cream/95 backdrop-blur border-b border-sand z-50">
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link to="/" className="font-serif text-lg tracking-wide text-ink">Y.H.</Link>
-          <Link to="/" className="text-sm text-muted hover:text-ink inline-flex items-center gap-1.5">
-            <span aria-hidden="true">&larr;</span> Home
-          </Link>
-        </div>
-      </nav>
-      <main className="max-w-5xl mx-auto px-6 pt-16 md:pt-20">
-        <section>
-          <SectionHeading id="research">Research</SectionHeading>
-          <ol className="divide-y divide-sand border-b border-sand">
-            {portfolioData.research.map((item) => (
-              <ResearchEntry key={item.title} item={item} onOpenDiagrams={setProjectModal} />
-            ))}
-          </ol>
-        </section>
-      </main>
+    <SubPage>
+      <section>
+        <SectionHeading id="research">Research</SectionHeading>
+        <ol className="divide-y divide-sand border-b border-sand">
+          {portfolioData.research.map((item) => (
+            <ResearchEntry key={item.title} item={item} onOpenDiagrams={setProjectModal} />
+          ))}
+        </ol>
+      </section>
       <FiguresModal project={projectModal} onClose={() => setProjectModal(null)} />
-    </div>
+    </SubPage>
+  );
+};
+
+const ProjectsPage = () => {
+  const [projectModal, setProjectModal] = useState(null);
+  return (
+    <SubPage>
+      <section>
+        <SectionHeading id="software">Projects</SectionHeading>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {portfolioData.softwareProjects.map((item) => (
+            <ProjectCard key={item.title} project={item} onOpenDiagrams={setProjectModal} />
+          ))}
+        </div>
+      </section>
+      <FiguresModal project={projectModal} onClose={() => setProjectModal(null)} />
+    </SubPage>
   );
 };
 
@@ -830,6 +860,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/research" element={<ResearchPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/acep_poster" element={<PdfPage title="ACEP Poster" src={bpPresentationPdf} />} />
         <Route path="/fall_2023" element={<PdfPage title="Poster 1 (Fall 2023)" src={poster1} />} />
         <Route path="/spring_2024" element={<PdfPage title="Poster 2 (Spring 2024)" src={poster2} />} />

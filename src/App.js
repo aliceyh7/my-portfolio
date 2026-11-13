@@ -64,7 +64,7 @@ import sbom2 from "./assets/diagrams/sbom2.png";
 
 const portfolioData = {
   name: "Yuhe (Alice) Hu",
-  intro: "I recently completed my Bachelor of Science at Duke University, where I double majored in Electrical/Computer Engineering and Computer Science. I've lived in Beijing, Toronto, Durham, and now the Bay Area.",
+  intro: "I recently completed my Bachelor of Science at Duke University, where I double majored in Electrical/Computer Engineering and Computer Science.",
   bio: "I'm an ML Research Engineer at Netflix working on recommendation and personalization systems. Previously, I was a Software Engineer at Meta, where I built RL training environments and evaluation harnesses used to train Meta's coding models. My background spans applied ML, security, and systems.",
   focus: {
     lead: "Most recently I've been learning about quantization and its effects on model behavior, and have built a few related projects",
@@ -91,8 +91,7 @@ const portfolioData = {
       link: "https://research.netflix.com/",
       tech: ["PyTorch", "CUDA", "Triton", "Distributed Training", "Retrieval", "Ranking"],
       points: [
-        "Scale retrieval and ranking models for Netflix's recommendation and personalization systems, studying how model capacity and data scale translate into member-facing quality.",
-        "Optimize GPU training and inference for large-scale recommenders (kernel efficiency, memory footprint, and throughput) to make larger models practical in production.",
+        "Building ranking algorithms and models behind all recommendation canvases on Netflix.",
       ],
     },
     {
@@ -102,8 +101,9 @@ const portfolioData = {
       link: "https://www.meta.com/",
       tech: ["Python", "Reinforcement Learning", "Evaluation", "Coding Models"],
       points: [
-        "RL training environments and eval harnesses used to train Meta's coding models.",
-        "Received rating \"Greatly Exceeds Expectations\" (GE).",
+        "RL training environments and eval harnesses for Meta's coding models.",
+        "Developer infra for subscriptions across Facebook, Instagram, WhatsApp, and Meta AI.",
+        "Received \"Greatly Exceeds Expectations\" (GE) rating.",
       ],
     },
     {
